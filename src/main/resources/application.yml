@@ -1,0 +1,11 @@
+
+
+spring:
+  # 서버 설정
+  server:
+    port: 8080
+  # 타임리프 설정
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
