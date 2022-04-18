@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" data-theme="cupcake">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
     <head>
         <meta charset="UTF-8" />
@@ -9,7 +9,7 @@
     <body>
         <header th:replace="fragments/header :: headerFragment"></header>
 
-        <section layout:fragment="content">
+        <section layout:fragment="content" class="mt-24">
             <span>내용</span>
         </section>
 

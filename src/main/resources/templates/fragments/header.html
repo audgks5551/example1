@@ -2,8 +2,27 @@
 <html>
 
     <header th:fragment="headerFragment">
-        <div>
-            <span>Header</span>
+        <div class="
+            flex flex-col bg-white items-center px-40 py-4 border-b border-b-gray-60 shadow-sm w-full fixed top-0 right-0 left-0
+            dark:bg-black dark:text-white
+            md:flex-row md:justify-between">
+
+            <!-- 로고 -->
+            <div>
+                <h2 class="text-3xl font-bold">
+                    <a th:href="@{/}">My <span class="text-blue-600">A</span>rticle</a>
+                </h2>
+            </div>
+
+            <!-- 링크 -->
+            <div class="mt-5 md:mt-0">
+                <ul class="flex flex-col md:flex-row md:space-x-5 w-full items-center">
+                    <li><a th:href="@{/}" class="font-semibold tracking-tight block cursor-pointer p-2 hover:text-blue-500 transition-colors duration-300">Home</a></li>
+                    <li><a th:href="@{/signup}" class="font-semibold tracking-tight block cursor-pointer p-2 hover:text-blue-500 transition-colors duration-300">Signup</a></li>
+                    <li><a th:href="@{/login}" class="font-semibold tracking-tight block cursor-pointer p-2 hover:text-blue-500 transition-colors duration-300">login</a></li>
+                </ul>
+            </div>
+
         </div>
     </header>
 
