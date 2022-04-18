@@ -1,4 +1,4 @@
-package com.wiken.example1.entity;
+package com.wiken.example1.user.entity;
 
 import lombok.Getter;
 import lombok.Setter;

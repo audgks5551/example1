@@ -1,4 +1,4 @@
-package com.wiken.example1.controller;
+package com.wiken.example1.user.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

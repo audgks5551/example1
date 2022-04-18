@@ -1,4 +1,4 @@
-package com.wiken.example1.dto;
+package com.wiken.example1.user.dto;
 
 import lombok.Data;
 

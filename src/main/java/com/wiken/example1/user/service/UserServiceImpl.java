@@ -1,8 +1,8 @@
-package com.wiken.example1.service;
+package com.wiken.example1.user.service;
 
-import com.wiken.example1.dto.UserDto;
-import com.wiken.example1.entity.UserEntity;
-import com.wiken.example1.repository.UserRepository;
+import com.wiken.example1.user.dto.UserDto;
+import com.wiken.example1.user.entity.UserEntity;
+import com.wiken.example1.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;

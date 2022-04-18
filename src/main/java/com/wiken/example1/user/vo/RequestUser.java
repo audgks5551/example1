@@ -1,4 +1,4 @@
-package com.wiken.example1.vo;
+package com.wiken.example1.user.vo;
 
 import lombok.Data;
 
