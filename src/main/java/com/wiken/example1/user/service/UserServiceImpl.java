@@ -2,6 +2,7 @@ package com.wiken.example1.user.service;
 
 import com.wiken.example1.user.dto.UserDto;
 import com.wiken.example1.user.entity.UserEntity;
+import com.wiken.example1.user.exception.UserNotFoundException;
 import com.wiken.example1.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -17,13 +18,13 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public UserDto createUser(UserDto userDto) throws Exception {
+    public UserDto createUser(UserDto userDto) throws UserNotFoundException {
         userDto.setUserId(UUID.randomUUID().toString());
 
         UserEntity userEntity = mapper.map(userDto, UserEntity.class);
 
         if (userEntity == null) {
-            throw new Exception("유저가 존재하지 않습니다.");
+            throw new UserNotFoundException("유저를 찾을 수 없습니다.");
         }
 
         userEntity.setEncryptedPwd("EncryptedPwd");

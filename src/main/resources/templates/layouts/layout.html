@@ -9,8 +9,10 @@
     <body class="flex flex-col min-h-screen">
         <header th:replace="fragments/header :: headerFragment"></header>
 
+        <div th:text="${message}"></div>
+
         <section layout:fragment="content" class="flex-1 pt-24 dark:bg-[#121212] dark:text-white">
-            <span>내용</span>
+            <div>내용</div>
         </section>
 
         <footer th:replace="fragments/footer :: footerFragment"></footer>
