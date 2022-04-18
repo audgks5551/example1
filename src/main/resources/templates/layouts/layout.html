@@ -6,14 +6,16 @@
         <link th:href="@{/css/tailwind.output.css}" rel="stylesheet">
     </head>
 
-    <body>
+    <body class="flex flex-col min-h-screen">
         <header th:replace="fragments/header :: headerFragment"></header>
 
-        <section layout:fragment="content" class="mt-24">
+        <section layout:fragment="content" class="flex-1 mt-24">
             <span>내용</span>
         </section>
 
         <footer th:replace="fragments/footer :: footerFragment"></footer>
+
+        <script th:src="@{/js/common.js}"></script>
     </body>
 
 </html>
