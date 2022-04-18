@@ -26,10 +26,6 @@ public class UserServiceImpl implements UserService {
             throw new Exception("유저가 존재하지 않습니다.");
         }
 
-        if (userEntity == null) {
-            throw new Exception("유저가 존재하지 않습니다.");
-        }
-
         userEntity.setEncryptedPwd("EncryptedPwd");
 
         UserEntity savedUserEntity = userRepository.save(userEntity);
