@@ -20,4 +20,6 @@ public class RequestUser {
     @NotNull
     @Size(min = 8, message = "비밀번호은 최소 8글자 이상을 적어주셔야 합니다.")
     private String pwd;
+
+    private String test;
 }

@@ -1,27 +1,15 @@
 <!DOCTYPE html>
-<html
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layouts/layout}"
->
-<!-- index.html 고유 CSS 추가 -->
-<th:block layout:fragment="css">
-    <style>
-        .testDiv{
-            height: 500px;
-            background-color: gold;
-        }
-    </style>
-</th:block>
-<!-- index.html 고유 스크립트 추가 -->
-<th:block layout:fragment="script"> </th:block>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout.html}">
 
-<div layout:fragment="content">
-    <div style="border: 1px solid red">
-        Y 블로그
-    </div>
-    <div class="testDiv">
-        TESTDIV 공간입니다
-    </div>
-</div>
+    <head>
+        <title>index</title>
+    </head>
+
+    <body>
+        <section layout:fragment="content">
+            <span>index</span>
+        </section>
+    </body>
+
 </html>

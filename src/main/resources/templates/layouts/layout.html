@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+    <head>
+        <meta charset="UTF-8" />
+    </head>
+
+    <body>
+        <header th:replace="fragments/header :: headerFragment"></header>
+
+        <section layout:fragment="content">
+            <span>내용</span>
+        </section>
+
+        <footer th:replace="fragments/footer :: footerFragment"></footer>
+    </body>
+
+</html>
