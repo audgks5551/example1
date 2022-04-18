@@ -5,3 +5,14 @@
 .display-none {
     @apply hidden;
 }
+
+/* 주아체 */
+@font-face {
+    font-family: 'BMJUA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+}
+
+html > body {
+    font-family: "BMJUA";
+    text-underline-position: under;
+}
