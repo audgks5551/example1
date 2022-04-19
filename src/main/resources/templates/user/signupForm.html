@@ -8,23 +8,50 @@
 
     <body>
         <section layout:fragment="content">
-            <div class="grid text-black place-items-center">
-                <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
-                    <h1 class="text-xl font-semibold">Sign up</h1>
-                    <form th:action="@{/signup}" th:object="${requestUser}" method="post" class="mt-6">
-                        <label th:for="*{email}" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">E-mail</label>
-                        <input th:field="*{email}" type="email" placeholder="example@example.com" autocomplete="email" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
-                        <label th:for="*{name}" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Name</label>
-                        <input th:field="*{name}" type="text" placeholder="홍길동" autocomplete="name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
-                        <label th:for="*{pwd}" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Password</label>
-                        <input th:field="*{pwd}" type="password" placeholder="********" autocomplete="new-password" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
-                        <label th:for="*{pwd1}" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Confirm password</label>
-                        <input th:field="*{pwd1}" type="password" placeholder="********" autocomplete="new-password" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
-                        <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
-                            Sign up
-                        </button>
-                        <p class="flex justify-between inline-block mt-4 text-xs text-gray-500 cursor-pointer hover:text-black">Already registered?</p>
-                    </form>
+            <div class="w-full lg:w-6/12 px-4 mx-auto pt-6">
+                <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
+                    <div class="rounded-t mb-0 px-6 py-6">
+                        <div class="text-center mb-3">
+                            <h6 class="text-blueGray-500 text-sm font-bold">
+                                Sign up with
+                            </h6>
+                        </div>
+                        <div class="btn-wrapper text-center">
+                            <button class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150" type="button">
+                                <img alt="..." class="w-5 mr-1" src="https://demos.creative-tim.com/notus-js/assets/img/github.svg">Github </button>
+                            <button class="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150" type="button">
+                                <img alt="..." class="w-5 mr-1" src="https://demos.creative-tim.com/notus-js/assets/img/google.svg">Google</button>
+                        </div>
+                        <hr class="mt-6 border-b-1 border-blueGray-300">
+                    </div>
+                    <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+                        <div class="text-blueGray-400 text-center mb-3 font-bold">
+                            <small>Or sign up with credentials</small>
+                        </div>
+                        <form th:action="@{/signup}" th:object="${requestUser}" method="post">
+                            <div class="relative w-full mb-3">
+                                <label th:for="*{email}" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">Email</label>
+                                <input th:field="*{email}" type="email" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Name">
+                            </div>
+                            <div class="relative w-full mb-3">
+                                <label th:for="*{name}" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">Name</label>
+                                <input th:field="*{name}" type="text" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Email">
+                            </div>
+                            <div class="relative w-full mb-3">
+                                <label th:for="*{pwd}" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">Password</label>
+                                <input th:field="*{pwd}" type="password" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Password">
+                            </div>
+                            <div class="relative w-full mb-3">
+                                <label th:for="*{pwd1}" class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">Password</label>
+                                <input th:field="*{pwd1}" type="password" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" placeholder="Password">
+                            </div>
+                            <div class="text-center mt-6">
+                                <button type="submit" class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150">
+                                    Create Account
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>

@@ -21,13 +21,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/css/**").permitAll()
+                .antMatchers("/css/**", "/h2-console/**", "/js/**").permitAll()
                 .antMatchers("/login", "/signup").permitAll()
-                .antMatchers("/**").authenticated();
+                .antMatchers("/**").permitAll();
 
-        /**
-         * h2 엑박처리
-         */
         http.csrf().ignoringAntMatchers("/h2-console/**")
                 .and()
                 .headers()
@@ -35,10 +32,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
                 .and()
                 .formLogin()
-//                .usernameParameter("email")
-//                .passwordParameter("pwd")
-//                .failureForwardUrl("/login")
-//                .loginPage("/login")
+                .loginPage("/login")
+                .usernameParameter("email")
+                .passwordParameter("pwd")
+                .failureForwardUrl("/login")
                 .defaultSuccessUrl("/");
     }
 
