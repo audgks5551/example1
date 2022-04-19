@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +29,12 @@ public class ArticleController {
         List<ResponseArticle> result = new ArrayList<>();
 
         articleList.forEach(a ->
-                mapper.map(a, ResponseArticle.class)
+                result.add(mapper.map(a, ResponseArticle.class))
         );
 
         model.addAttribute("articles", result);
 
-        return "/article/articleList";
+        return "article/articleList";
     }
 
     @GetMapping("/create")
