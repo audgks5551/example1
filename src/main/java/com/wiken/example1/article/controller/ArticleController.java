@@ -2,6 +2,7 @@ package com.wiken.example1.article.controller;
 
 import com.wiken.example1.article.dto.ArticleDto;
 import com.wiken.example1.article.entity.ArticleEntity;
+import com.wiken.example1.article.exception.ArticleNotFoundException;
 import com.wiken.example1.article.service.ArticleService;
 import com.wiken.example1.article.vo.RequestArticle;
 import com.wiken.example1.article.vo.ResponseArticle;
@@ -10,10 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -61,6 +59,19 @@ public class ArticleController {
         redirectAttributes.addFlashAttribute("message", "게시글이 생성되었습니다.");
 
         return "redirect:/article";
+    }
+
+    @GetMapping("/{articleId}")
+    public String articleDetail(
+            @PathVariable(value = "articleId") String articleId,
+            Model model) throws ArticleNotFoundException {
+        ArticleEntity articleEntity = articleService.findArticle(articleId);
+
+        ResponseArticle responseArticle = mapper.map(articleEntity, ResponseArticle.class);
+
+        model.addAttribute("article", responseArticle);
+
+        return "article/articleDetail";
     }
 
 }

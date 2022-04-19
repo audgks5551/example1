@@ -42,36 +42,36 @@
                                     <th class="text-center px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Modified date</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr th:each="article, index : ${articles}"
-                                    class="hover:cursor-pointer hover:text-red-500" >
-                                    <td class="text-center px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <a th:href="@{'/article/' + ${article.articleId}}">
+                            <tbody th:each="article, index : ${articles}">
+                                <tr th:href="@{'/article/' + ${article.articleId}}"
+                                    class="hover:cursor-pointer hover:text-red-500">
+                                    <td class="text-center py-5 border-b border-gray-200 bg-white text-sm">
+                                        <a th:href="@{'/article/' + ${article.articleId}}" class="block w-full h-full">
                                             <span th:text="${index.count}"></span>
                                         </a>
                                     </td>
-                                    <td class="w-[55%] text-center px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <a th:href="@{'/article/' + ${article.articleId}}">
+                                    <td class="text-center py-5 border-b border-gray-200 bg-white text-sm w-[55%]">
+                                        <a th:href="@{'/article/' + ${article.articleId}}" class="block w-full h-full">
                                             <span th:text="${article.title}"></span>
                                         </a>
                                     </td>
-                                    <td class="text-center px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <a th:href="@{'/article/' + ${article.articleId}}">
+                                    <td class="text-center py-5 border-b border-gray-200 bg-white text-sm">
+                                        <a th:href="@{'/article/' + ${article.articleId}}" class="block w-full h-full">
                                             <span>글쓴이</span>
                                         </a>
                                     </td>
-                                    <td class="text-center px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <a th:href="@{'/article/' + ${article.articleId}}">
+                                    <td class="text-center py-5 border-b border-gray-200 bg-white text-sm">
+                                        <a th:href="@{'/article/' + ${article.articleId}}" class="block w-full h-full">
                                             <span>0</span>
                                         </a>
                                     </td>
-                                    <td class="text-center px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <a th:href="@{'/article/' + ${article.articleId}}">
+                                    <td class="text-center py-5 border-b border-gray-200 bg-white text-sm">
+                                        <a th:href="@{'/article/' + ${article.articleId}}" class="block w-full h-full">
                                             <span th:text="${article.createdDate}"></span>
                                         </a>
                                     </td>
-                                    <td  class="text-center px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <a th:href="@{'/article/' + ${article.articleId}}">
+                                    <td  class="text-center py-5 border-b border-gray-200 bg-white text-sm">
+                                        <a th:href="@{'/article/' + ${article.articleId}}" class="block w-full h-full">
                                             <span th:text="${article.modifiedDate}"></span>
                                         </a>
                                     </td>

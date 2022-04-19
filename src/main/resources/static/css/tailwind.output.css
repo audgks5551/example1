@@ -525,6 +525,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-right: auto;
 }
 
+.my-5 {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
 .ml-1 {
   margin-left: 0.25rem;
 }
@@ -671,6 +676,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-10\/12 {
   width: 83.333333%;
+}
+
+.w-\[155\%\] {
+  width: 155%;
 }
 
 .min-w-full {
@@ -955,6 +964,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .px-40 {
   padding-left: 10rem;
   padding-right: 10rem;
+}
+
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
 }
 
 .pb-6 {
