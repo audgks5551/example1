@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -18,6 +19,7 @@ public class UserServiceImpl implements UserService {
 
     private final ModelMapper mapper;
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public UserDto createUser(UserDto userDto) throws UserNotFoundException {
@@ -29,12 +31,17 @@ public class UserServiceImpl implements UserService {
             throw new UserNotFoundException("유저를 찾을 수 없습니다.");
         }
 
-        userEntity.setEncryptedPwd("EncryptedPwd");
+        userEntity.setEncryptedPwd(passwordEncoder.encode(userDto.getPwd()));
 
         UserEntity savedUserEntity = userRepository.save(userEntity);
 
         UserDto savedUserDto = mapper.map(savedUserEntity, UserDto.class);
 
         return savedUserDto;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
     }
 }
