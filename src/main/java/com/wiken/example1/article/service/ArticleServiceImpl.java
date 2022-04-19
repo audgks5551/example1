@@ -27,4 +27,9 @@ public class ArticleServiceImpl implements ArticleService {
 
         return returnValue;
     }
+
+    @Override
+    public Iterable<ArticleEntity> findAllArticles() {
+        return articleRepository.findAll();
+    }
 }
