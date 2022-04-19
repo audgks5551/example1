@@ -8,5 +8,5 @@ public interface ArticleService {
     ArticleDto createArticle(ArticleDto articleDto);
     Iterable<ArticleEntity> findAllArticles();
     ArticleEntity findArticle(String articleId) throws ArticleNotFoundException;
-
+    void deleteArticle(String articleId) throws ArticleNotFoundException;
 }

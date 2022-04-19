@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.UUID;
 
 @Service
@@ -44,5 +45,10 @@ public class ArticleServiceImpl implements ArticleService {
         }
 
         return articleEntity;
+    }
+
+    @Override
+    public void deleteArticle(String articleId) {
+        articleRepository.deleteByArticleId(articleId);
     }
 }

@@ -7,6 +7,7 @@ import com.wiken.example1.article.service.ArticleService;
 import com.wiken.example1.article.vo.RequestArticle;
 import com.wiken.example1.article.vo.ResponseArticle;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.Parameter;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,6 +73,18 @@ public class ArticleController {
         model.addAttribute("article", responseArticle);
 
         return "article/articleDetail";
+    }
+
+    @GetMapping("/delete/{articleId}")
+    public String deleteArticle(
+            @PathVariable(value = "articleId") String articleId,
+            RedirectAttributes redirectAttributes) throws ArticleNotFoundException {
+
+        articleService.deleteArticle(articleId);
+
+        redirectAttributes.addFlashAttribute("message", "게시글이 삭제되었습니다.");
+
+        return "redirect:/article";
     }
 
 }
