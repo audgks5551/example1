@@ -43,13 +43,38 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="article, index : ${articles}">
-                                    <td th:text="${index.count}" class="text-center px-5 py-5 border-b border-gray-200 bg-white text-sm"></td>
-                                    <td th:text="${article.title}" class="w-[55%] text-center px-5 py-5 border-b border-gray-200 bg-white text-sm"></td>
-                                    <td class="text-center px-5 py-5 border-b border-gray-200 bg-white text-sm">글쓴이</td>
-                                    <td class="text-center px-5 py-5 border-b border-gray-200 bg-white text-sm">0</td>
-                                    <td th:text="${article.createdDate}" class="text-center px-5 py-5 border-b border-gray-200 bg-white text-sm"></td>
-                                    <td th:text="${article.modifiedDate}" class="text-center px-5 py-5 border-b border-gray-200 bg-white text-sm"></td>
+                                <tr th:each="article, index : ${articles}"
+                                    class="hover:cursor-pointer hover:text-red-500" >
+                                    <td class="text-center px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        <a th:href="@{'/article/' + ${article.articleId}}">
+                                            <span th:text="${index.count}"></span>
+                                        </a>
+                                    </td>
+                                    <td class="w-[55%] text-center px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        <a th:href="@{'/article/' + ${article.articleId}}">
+                                            <span th:text="${article.title}"></span>
+                                        </a>
+                                    </td>
+                                    <td class="text-center px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        <a th:href="@{'/article/' + ${article.articleId}}">
+                                            <span>글쓴이</span>
+                                        </a>
+                                    </td>
+                                    <td class="text-center px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        <a th:href="@{'/article/' + ${article.articleId}}">
+                                            <span>0</span>
+                                        </a>
+                                    </td>
+                                    <td class="text-center px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        <a th:href="@{'/article/' + ${article.articleId}}">
+                                            <span th:text="${article.createdDate}"></span>
+                                        </a>
+                                    </td>
+                                    <td  class="text-center px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        <a th:href="@{'/article/' + ${article.articleId}}">
+                                            <span th:text="${article.modifiedDate}"></span>
+                                        </a>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
