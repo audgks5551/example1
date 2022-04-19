@@ -13,13 +13,13 @@
                     <h1 class="text-xl font-semibold">Sign up</h1>
                     <form th:action="@{/signup}" th:object="${requestUser}" method="post" class="mt-6">
                         <label th:for="*{email}" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">E-mail</label>
-                        <input th:field="*{email}" type="email" name="email" placeholder="example@example.com" autocomplete="email" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+                        <input th:field="*{email}" type="email" placeholder="example@example.com" autocomplete="email" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
                         <label th:for="*{name}" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Name</label>
                         <input th:field="*{name}" type="text" placeholder="홍길동" autocomplete="name" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
                         <label th:for="*{pwd}" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Password</label>
-                        <input th:field="*{pwd}" type="password" name="password-confirm" placeholder="********" autocomplete="new-password" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+                        <input th:field="*{pwd}" type="password" placeholder="********" autocomplete="new-password" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
                         <label th:for="*{pwd1}" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Confirm password</label>
-                        <input th:field="*{pwd1}" type="password" name="password-confirm" placeholder="********" autocomplete="new-password" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+                        <input th:field="*{pwd1}" type="password" placeholder="********" autocomplete="new-password" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
                         <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
                             Sign up
                         </button>

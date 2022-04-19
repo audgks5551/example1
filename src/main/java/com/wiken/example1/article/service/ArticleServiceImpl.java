@@ -17,15 +17,11 @@ public class ArticleServiceImpl implements ArticleService {
     private final ModelMapper mapper;
 
     @Override
-    public ArticleDto createArticle(ArticleDto articleDto) {
+    public void createArticle(ArticleDto articleDto) {
         ArticleEntity articleEntity = mapper.map(articleDto, ArticleEntity.class);
         articleEntity.setArticleId(UUID.randomUUID().toString());
 
-        ArticleEntity savedArticle = articleRepository.save(articleEntity);
-
-        ArticleDto returnValue = mapper.map(savedArticle, ArticleDto.class);
-
-        return returnValue;
+        articleRepository.save(articleEntity);
     }
 
     @Override
