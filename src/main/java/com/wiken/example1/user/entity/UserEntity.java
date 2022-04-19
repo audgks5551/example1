@@ -1,11 +1,10 @@
 package com.wiken.example1.user.entity;
 
+import com.wiken.example1.base.entity.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * 유저 Entity
@@ -13,7 +12,7 @@ import java.util.Date;
 @Getter
 @Entity
 @Table(name = "users")
-public class UserEntity {
+public class UserEntity extends BaseEntity {
 
     /**
      * 테이블 번호
@@ -49,12 +48,4 @@ public class UserEntity {
     @Setter
     @Column(nullable = false, unique = true)
     private String encryptedPwd;
-
-    /**
-     * 가입 일자
-     */
-    @Setter
-    @Column(nullable = false, updatable = false, insertable = false)
-    @ColumnDefault(value = "CURRENT_TIMESTAMP")
-    private Date createdAt;
 }
