@@ -48,7 +48,12 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public void deleteArticle(String articleId) {
-        articleRepository.deleteByArticleId(articleId);
+    public void deleteArticle(String articleId) throws ArticleNotFoundException {
+
+        try {
+            articleRepository.deleteByArticleId(articleId);
+        } catch (Exception e) {
+            throw new ArticleNotFoundException("게시글을 삭제할 수 없습니다.");
+        }
     }
 }

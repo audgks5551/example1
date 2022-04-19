@@ -1,4 +1,4 @@
-package com.wiken.example1.config;
+package com.wiken.example1.base.config;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
