@@ -41,7 +41,7 @@ public class UserController {
 
         redirectAttributes.addFlashAttribute("message", String.format("%s님 환영합니다.", userDto.getName()));
 
-        return "redirect:/";
+        return "redirect:/login";
     }
 
     /**
