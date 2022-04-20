@@ -20,23 +20,38 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        /**
+         * 인가 정책
+         */
+        http
+                .authorizeRequests()
                 .antMatchers("/css/**", "/h2-console/**", "/js/**").permitAll()
                 .antMatchers("/login", "/signup").permitAll()
                 .antMatchers("/**").permitAll();
 
-        http.csrf().ignoringAntMatchers("/h2-console/**")
+        /**
+         * h2-console
+         */
+        http
+                .csrf().ignoringAntMatchers("/h2-console/**")
                 .and()
                 .headers()
                 .addHeaderWriter(new XFrameOptionsHeaderWriter(
-                        XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
-                .and()
+                        XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN));
+
+        /**
+         * 인증 정책
+         */
+        http
                 .formLogin()
                 .loginPage("/login")
+                .failureUrl("/login-error")
                 .usernameParameter("email")
                 .passwordParameter("pwd")
-                .failureForwardUrl("/login")
-                .defaultSuccessUrl("/");
+                .defaultSuccessUrl("/")
+        .and()
+                .logout()
+                .logoutSuccessUrl("/");
     }
 
     @Override

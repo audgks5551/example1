@@ -28,13 +28,16 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserDto createUser(UserDto userDto) throws UserNotFoundException {
+
+        UserEntity findUserEntity = userRepository.findByEmail(userDto.getEmail());
+
+        if (findUserEntity != null) {
+            throw new UserNotFoundException("중복된 이메일이 존재합니다.");
+        }
+
         userDto.setUserId(UUID.randomUUID().toString());
 
         UserEntity userEntity = mapper.map(userDto, UserEntity.class);
-
-        if (userEntity == null) {
-            throw new UserNotFoundException("유저를 찾을 수 없습니다.");
-        }
 
         userEntity.setEncryptedPwd(passwordEncoder.encode(userDto.getPwd()));
 

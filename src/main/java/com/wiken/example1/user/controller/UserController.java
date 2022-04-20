@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -35,6 +36,7 @@ public class UserController {
             RedirectAttributes redirectAttributes) throws UserNotFoundException {
 
         UserDto userDto = mapper.map(requestUser, UserDto.class);
+
         userService.createUser(userDto);
 
         redirectAttributes.addFlashAttribute("message", String.format("%s님 환영합니다.", userDto.getName()));
@@ -42,8 +44,22 @@ public class UserController {
         return "redirect:/";
     }
 
+    /**
+     * 로그인 폼
+     */
     @GetMapping("/login")
-    public String loginForm(Model model) {
+    public String loginForm() {
         return "user/loginForm";
+    }
+
+    /**
+     * 로그인 실패시
+     */
+    @GetMapping("/login-error")
+    public String loginError(Model model) {
+
+        model.addAttribute("loginError", true);
+
+        return "/user/loginForm";
     }
 }

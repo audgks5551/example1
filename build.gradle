@@ -42,9 +42,11 @@ dependencies {
 
 	/**
 	 * 타임리프 추가 (2022.04.18)
+	 * 	- thymeleaf-extras-springsecurity5 추가 (2022.04.20)
 	 */
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.1.0'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
 	/**
 	 * spring security 추가 (2022.04.20)
