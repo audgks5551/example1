@@ -1,6 +1,7 @@
 package com.wiken.example1.user.service;
 
 import com.wiken.example1.user.dto.UserDto;
+import com.wiken.example1.user.entity.SUser;
 import com.wiken.example1.user.entity.UserEntity;
 import com.wiken.example1.user.exception.UserNotFoundException;
 import com.wiken.example1.user.repository.UserRepository;
@@ -59,7 +60,12 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException(email);
         }
 
-        return userEntity;
+        return new SUser(
+                userEntity,
+                userEntity.getUserId(),
+                userEntity.getEmail(),
+                userEntity.getName()
+        );
 //        return new User(userEntity.getEmail(), userEntity.getEncryptedPwd(),
 //                true, true, true, true,
 //                new ArrayList<>());

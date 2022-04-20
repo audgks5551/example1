@@ -6,8 +6,10 @@ import com.wiken.example1.article.exception.ArticleNotFoundException;
 import com.wiken.example1.article.service.ArticleService;
 import com.wiken.example1.article.vo.RequestArticle;
 import com.wiken.example1.article.vo.ResponseArticle;
+import com.wiken.example1.user.entity.SUser;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -47,9 +49,10 @@ public class ArticleController {
     @PostMapping("/create")
     public String createArticle(
             @ModelAttribute RequestArticle requestArticle,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes,
+            @AuthenticationPrincipal SUser user) {
         ArticleDto articleDto = mapper.map(requestArticle, ArticleDto.class);
-        articleDto.setUserId("EXAMPLE-USER-UUID1");
+        articleDto.setUserId(user.getUserId());
 
         articleService.createArticle(articleDto);
 

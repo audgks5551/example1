@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -15,7 +16,7 @@ import java.util.Collection;
 @Getter
 @Entity
 @Table(name = "users")
-public class UserEntity extends BaseEntity implements UserDetails {
+public class UserEntity extends BaseEntity implements Serializable {
 
     /**
      * 테이블 번호
@@ -51,49 +52,4 @@ public class UserEntity extends BaseEntity implements UserDetails {
     @Setter
     @Column(nullable = false, unique = true)
     private String encryptedPwd;
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return encryptedPwd;
-    }
-
-    @Override
-    public String getUsername() {
-        return userId;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "UserEntity{" +
-                "email='" + email + '\'' +
-                ", name='" + name + '\'' +
-                ", userId='" + userId + '\'' +
-                ", encryptedPwd='" + "[PROTECTED]" + '\'' +
-                '}';
-    }
 }

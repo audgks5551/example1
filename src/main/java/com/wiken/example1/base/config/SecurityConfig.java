@@ -26,19 +26,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
          */
         http
                 .authorizeRequests()
+                .antMatchers("/**").permitAll()
                 .antMatchers("/css/**", "/h2-console/**", "/js/**").permitAll()
-                .antMatchers("/login", "/signup", "/logout").permitAll()
-                .antMatchers("/**").permitAll();
+                .antMatchers("/login", "/signup", "/logout").permitAll();
 
         /**
          * h2-console
          */
-        http
-                .csrf().ignoringAntMatchers("/h2-console/**")
-                .and()
-                .headers()
-                .addHeaderWriter(new XFrameOptionsHeaderWriter(
-                        XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN));
+        http.cors().and().csrf().disable();
 
         /**
          * 인증 정책
