@@ -52,6 +52,7 @@ public class ArticleController {
             RedirectAttributes redirectAttributes,
             @AuthenticationPrincipal SUser user) {
         ArticleDto articleDto = mapper.map(requestArticle, ArticleDto.class);
+
         articleDto.setUserId(user.getUserId());
 
         articleService.createArticle(articleDto);

@@ -29,6 +29,7 @@
     <!--인증시 사용된 객체의 Username (ID)-->
     <b>Authenticated username:</b>
     <div sec:authentication="name"></div>
+    <div th:if="${#authentication.principal.userId} != null" th:text="${#authentication.principal.userId}"></div>
 
     <!--객체의 권한-->
     <b>Authenticated user role:</b>

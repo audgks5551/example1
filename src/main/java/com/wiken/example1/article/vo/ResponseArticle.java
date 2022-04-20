@@ -13,6 +13,7 @@ public class ResponseArticle {
     private String title;
     private String content;
     private String articleId;
+    private String userId;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 }
