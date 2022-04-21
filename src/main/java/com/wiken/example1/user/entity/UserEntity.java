@@ -1,5 +1,6 @@
 package com.wiken.example1.user.entity;
 
+import com.wiken.example1.article.entity.ArticleEntity;
 import com.wiken.example1.base.entity.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +9,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * 유저 Entity

@@ -33,7 +33,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         /**
          * h2-console
          */
-        http.cors().and().csrf().disable();
+        http.cors().and().csrf().disable()
+                .headers()
+                .addHeaderWriter(new XFrameOptionsHeaderWriter(
+                        XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN));
 
         /**
          * 인증 정책
