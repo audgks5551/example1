@@ -18,23 +18,13 @@
                                 <div th:text="${article.createdDate}" class="text-slate-500"></div>
                             </div>
                         </div>
-                        <div>
-                            <!--                                  th:action="@{'/article/delete/{id}'(id=${article.articleId})}"-->
-                            <form th:if="${#authentication.principal.userId} == ${article.userId}"
-                                  th:method="GET">
-                                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                                    수정
-                                </button>
-                            </form>
-                        </div>
-                        <div>
-                            <form th:if="${#authentication.principal.userId} == ${article.userId}"
-                                  th:action="@{'/article/delete/{id}'(id=${article.articleId})}"
-                                  th:method="GET">
-                                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                                    삭제
-                                </button>
-                            </form>
+                        <div th:if="${#authentication.principal.userId} == ${article.userId}">
+                            <a th:href="@{/article/modify(id=${article.articleId})}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                                수정
+                            </a>
+                            <a th:href="@{/article/delete(id=${article.articleId})}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                                삭제
+                            </a>
                         </div>
                     </div>
                     <h2 th:text="${article.title}" class="text-3xl font-extrabold mb-2"></h2>

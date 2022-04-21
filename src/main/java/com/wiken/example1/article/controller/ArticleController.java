@@ -62,9 +62,9 @@ public class ArticleController {
         return "redirect:/article";
     }
 
-    @GetMapping("/{articleId}")
+    @GetMapping("/detail")
     public String articleDetail(
-            @PathVariable(value = "articleId") String articleId,
+            @RequestParam("id") String articleId,
             Model model) throws ArticleNotFoundException {
         ArticleEntity articleEntity = articleService.findArticle(articleId);
 
@@ -75,16 +75,18 @@ public class ArticleController {
         return "article/articleDetail";
     }
 
-    @GetMapping("/delete/{articleId}")
+    @GetMapping("/delete")
     public String deleteArticle(
-            @PathVariable(value = "articleId") String articleId,
-            RedirectAttributes redirectAttributes) throws ArticleNotFoundException {
+            @RequestParam("id") String articleId,
+            RedirectAttributes redirectAttributes,
+            @AuthenticationPrincipal SUser user) throws ArticleNotFoundException {
 
-        articleService.deleteArticle(articleId);
+        articleService.deleteArticle(articleId, user.getUserId());
 
         redirectAttributes.addFlashAttribute("message", "게시글이 삭제되었습니다.");
 
         return "redirect:/article";
     }
+
 
 }

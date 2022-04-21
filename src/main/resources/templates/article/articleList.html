@@ -43,7 +43,7 @@
                                 </tr>
                             </thead>
                             <tbody th:each="article, index : ${articles}">
-                                <tr th:onclick="|location.href='@{'/article/' + ${article.articleId}}'|"
+                                <tr th:onclick="|location.href='@{'/article/detail?id=' + ${article.articleId}}'|"
                                     class="hover:cursor-pointer hover:text-red-500">
                                     <td th:text="${index.count}" class="text-center py-5 border-b border-gray-200 bg-white text-sm"></td>
                                     <td th:text="${article.title}" class="text-center py-5 border-b border-gray-200 bg-white text-sm w-[55%]"></td>

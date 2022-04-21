@@ -9,5 +9,5 @@ public interface ArticleRepository extends CrudRepository<ArticleEntity, Long> {
     ArticleEntity findByArticleId(String articleId);
 
     @Transactional
-    void deleteByArticleId(String articleId);
+    void deleteByArticleIdAndUserId(String articleId, String userId);
 }
