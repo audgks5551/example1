@@ -18,7 +18,7 @@
                                 <div th:text="${article.createdDate}" class="text-slate-500"></div>
                             </div>
                         </div>
-                        <div th:if="${#authentication.principal.userId} == ${article.userId}">
+                        <div th:if="${#authentication.principal.userId} == ${article.user.userId}">
                             <a th:href="@{/article/modify(id=${article.articleId})}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                                 수정
                             </a>

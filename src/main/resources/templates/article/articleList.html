@@ -47,7 +47,7 @@
                                     class="hover:cursor-pointer hover:text-red-500">
                                     <td th:text="${index.count}" class="text-center py-5 border-b border-gray-200 bg-white text-sm"></td>
                                     <td th:text="${article.title}" class="text-center py-5 border-b border-gray-200 bg-white text-sm w-[55%]"></td>
-                                    <td class="text-center py-5 border-b border-gray-200 bg-white text-sm">글쓴이</td>
+                                    <td th:text="${article.user.name}" class="text-center py-5 border-b border-gray-200 bg-white text-sm">글쓴이</td>
                                     <td class="text-center py-5 border-b border-gray-200 bg-white text-sm">0</td>
                                     <td th:text="${article.createdDate}" class="text-center py-5 border-b border-gray-200 bg-white text-sm"></td>
                                     <td th:text="${article.modifiedDate}" class="text-center py-5 border-b border-gray-200 bg-white text-sm"></td>

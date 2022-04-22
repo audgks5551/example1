@@ -4,7 +4,6 @@ import com.wiken.example1.article.dto.ArticleDto;
 import com.wiken.example1.article.entity.ArticleEntity;
 import com.wiken.example1.article.exception.ArticleNotFoundException;
 import com.wiken.example1.article.repository.ArticleRepository;
-import com.wiken.example1.user.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -33,7 +32,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Iterable<ArticleEntity> findAllArticles() {
-        return articleRepository.findAll();
+        return articleRepository.findArticleWithUserAll();
     }
 
     @Override
@@ -48,12 +47,21 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public void deleteArticle(String articleId, String userId) throws ArticleNotFoundException {
+    public void deleteArticle(String articleId) throws ArticleNotFoundException {
 
         try {
-            articleRepository.deleteByArticleIdAndUserId(articleId, userId);
+            articleRepository.deleteByArticleId(articleId);
         } catch (Exception e) {
             throw new ArticleNotFoundException("게시글을 삭제할 수 없습니다.");
         }
+    }
+
+    @Transactional
+    @Override
+    public void modifyArticle(ArticleDto articleDto) {
+
+        ArticleEntity articleEntity = articleRepository.findByArticleId(articleDto.getArticleId());
+        articleEntity.setTitle(articleDto.getTitle());
+        articleEntity.setContent(articleDto.getContent());
     }
 }

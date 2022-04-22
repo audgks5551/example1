@@ -49,6 +49,11 @@ public class UserServiceImpl implements UserService {
         return savedUserDto;
     }
 
+    @Override
+    public UserEntity findUserByUserId(String userId) {
+        return userRepository.findByUserId(userId);
+    }
+
     /**
      * spring security method
      */

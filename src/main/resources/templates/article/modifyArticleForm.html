@@ -4,14 +4,16 @@
       layout:decorate="~{layouts/layout.html}">
 
     <head>
-        <title>create</title>
+        <title>modify</title>
     </head>
 
     <body>
         <section layout:fragment="content">
 
-            <div class="heading text-center font-bold text-2xl m-5 text-gray-800">New Article</div>
-            <form th:object="${requestCreateArticle}" method="post">
+            <div class="heading text-center font-bold text-2xl m-5 text-gray-800">modify Article</div>
+            <form th:if="${#authentication.principal.userId} == ${modifyArticle.user.userId}"
+                  th:action="@{/article/modify(id=${modifyArticle.articleId})}"
+                  th:object="${modifyArticle}" method="POST">
                 <div class="editor mx-auto w-10/12 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl">
                     <input th:field="*{title}" class="title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none" spellcheck="false" placeholder="Title" type="text">
                     <textarea th:field="*{content}" class="description bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none" spellcheck="false" placeholder="Describe everything about this post here"></textarea>
@@ -24,8 +26,8 @@
                     </div>
                     <!-- buttons -->
                     <div class="buttons flex">
-                        <a th:href="@{/article}" class="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto">Cancel</a>
-                        <button type="submit" class="btn border border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-indigo-500">Create</button>
+                        <a th:href="@{/article/detail/(id=${modifyArticle.articleId})}" class="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto">Cancel</a>
+                        <button type="submit" class="btn border border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-indigo-500">Modify</button>
                     </div>
                 </div>
             </form>
