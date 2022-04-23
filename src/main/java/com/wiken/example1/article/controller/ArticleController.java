@@ -135,7 +135,6 @@ public class ArticleController {
 
         ArticleDto articleDto = mapper.map(requestArticle, ArticleDto.class);
         articleDto.setArticleId(articleId);
-        articleDto.setUser(userEntity);
 
         articleService.modifyArticle(articleDto);
 

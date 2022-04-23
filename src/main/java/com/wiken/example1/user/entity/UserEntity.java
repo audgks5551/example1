@@ -46,7 +46,7 @@ public class UserEntity extends BaseEntity implements Serializable {
      * UUID를 통한 유저 번호
      */
     @Setter
-    @Column(nullable = false, unique = true)
+    @Column(name = "user_id", nullable = false, unique = true)
     private String userId;
 
     /**

@@ -22,7 +22,7 @@ class ArticleEntityTest {
         articleEntity.setTitle("오늘 처음 게시글 올리는 사람입니다.");
         articleEntity.setContent("잘 부탁드립니다~");
         articleEntity.setArticleId("ARTICLE-UUID1");
-        articleEntity.setUserId("USER-UUID1");
+//        articleEntity.setUser("USER-UUID1");
 
         Assertions.assertNotNull(
                 articleRepository.save(articleEntity).getCreatedDate()

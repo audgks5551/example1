@@ -19,7 +19,7 @@ class ArticleServiceImplTest {
         ArticleDto articleDto = new ArticleDto();
         articleDto.setTitle("오늘 처음 게시글 올리는 사람입니다.");
         articleDto.setContent("잘 부탁드립니다~");
-        articleDto.setUserId("USER-UUID1");
+//        articleDto.setUserId("USER-UUID1");
 
         Assertions.assertNotNull(
                 articleService.createArticle(articleDto).getCreatedDate()

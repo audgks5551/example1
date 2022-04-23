@@ -46,7 +46,7 @@ public class ArticleEntity extends BaseEntity {
      * 글쓴이 UUID
      */
     @Setter
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "user_id")
     @ManyToOne(fetch = LAZY)
     private UserEntity user;
 }
