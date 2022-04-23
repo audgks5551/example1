@@ -20,6 +20,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "reaction_points")
 public class ReactionPointEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = IDENTITY)

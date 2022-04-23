@@ -1,6 +1,7 @@
 package com.wiken.example1.article.entity;
 
 import com.wiken.example1.article.repository.ReactionPointRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +15,12 @@ import static com.wiken.example1.article.entity.eum.RelType.ARTICLE;
 import static com.wiken.example1.article.entity.eum.Point.GOOD;
 
 @SpringBootTest
-@Transactional
-@Commit
-@Rollback(value = false)
 public class ReactionPointTest {
 
     @Autowired
     private ReactionPointRepository reactionPointRepository;
 
-    @Test
+    @BeforeEach
     @DisplayName("저장 테스트")
     public void save() {
         ReactionPointEntity reactionPoint = new ReactionPointEntity();

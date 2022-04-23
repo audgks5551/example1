@@ -84,8 +84,8 @@ public class ArticleController {
             @RequestParam("id") String articleId,
             RedirectAttributes redirectAttributes,
             @AuthenticationPrincipal SUser user) throws ArticleNotFoundException {
-        UserEntity userEntity = userService.findUserByUserId(user.getUserId());
-        if(userEntity.getUserId() != user.getUserId()) {
+        ArticleEntity articleEntity = articleService.findArticle(articleId);
+        if(!user.getUserId().equals(articleEntity.getUser().getUserId())) {
             redirectAttributes.addFlashAttribute("message", "삭제할 권한이 없습니다.");
             return "redirect:/article";
         }
@@ -105,7 +105,7 @@ public class ArticleController {
 
         ArticleEntity articleEntity = articleService.findArticle(articleId);
 
-        if (user.getUserId() != articleEntity.getUser().getUserId()) {
+        if (!user.getUserId().equals(articleEntity.getUser().getUserId())) {
             redirectAttributes.addAttribute("id", articleEntity.getArticleId());
             redirectAttributes.addFlashAttribute("message", "수정 권한이 없습니다.");
             return "redirect:/article/detail";
@@ -127,7 +127,7 @@ public class ArticleController {
 
 
         UserEntity userEntity = userService.findUserByUserId(user.getUserId());
-        if (userEntity.getUserId() != user.getUserId()) {
+        if (!userEntity.getUserId().equals(user.getUserId())) {
             redirectAttributes.addAttribute("id", requestArticle.getArticleId());
             redirectAttributes.addFlashAttribute("message", "수정 권한이 없습니다.");
             return "redirect:/article/detail";
@@ -141,5 +141,4 @@ public class ArticleController {
         redirectAttributes.addAttribute("id", articleId);
         return "redirect:/article/detail";
     }
-
 }

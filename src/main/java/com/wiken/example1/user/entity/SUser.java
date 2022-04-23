@@ -19,6 +19,7 @@ public class SUser implements UserDetails {
     @Getter
     private final String name;
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

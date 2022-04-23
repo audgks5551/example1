@@ -1,3 +1,5 @@
+
+
 insert into ARTICLES (ID, CREATED_DATE, MODIFIED_DATE, ARTICLE_ID, CONTENT, TITLE, USER_ID)
     values (null, LocalTime.now(), LocalTime.now(), 'ARTICLE-UUID1', 'title1', 'content1',  'USER-UUID1');
 insert into ARTICLES (ID, CREATED_DATE, MODIFIED_DATE, ARTICLE_ID, CONTENT, TITLE, USER_ID)
