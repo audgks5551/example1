@@ -11,6 +11,6 @@ spring:
         format_sql: true
         use_sql_comments: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
                 #      ddl-auto: none
     database-platform: org.hibernate.dialect.MariaDB53Dialect

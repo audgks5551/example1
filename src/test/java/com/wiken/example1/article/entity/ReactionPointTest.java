@@ -1,15 +1,11 @@
 package com.wiken.example1.article.entity;
 
 import com.wiken.example1.article.repository.ReactionPointRepository;
-import org.junit.jupiter.api.BeforeEach;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Commit;
-import org.springframework.test.annotation.Rollback;
-
-import javax.transaction.Transactional;
 
 import static com.wiken.example1.article.entity.eum.RelType.ARTICLE;
 import static com.wiken.example1.article.entity.eum.Point.GOOD;
@@ -20,7 +16,7 @@ public class ReactionPointTest {
     @Autowired
     private ReactionPointRepository reactionPointRepository;
 
-    @BeforeEach
+    @Test
     @DisplayName("저장 테스트")
     public void save() {
         ReactionPointEntity reactionPoint = new ReactionPointEntity();
@@ -29,6 +25,9 @@ public class ReactionPointTest {
         reactionPoint.setRelType(ARTICLE);
 
         ReactionPointEntity savedReactionPoint = reactionPointRepository.save(reactionPoint);
+
+        Assertions.assertThat(savedReactionPoint.getCreatedDate()).isNotNull();
+
         System.out.println("savedReactionPoint.getId() = " + savedReactionPoint.getId());
         System.out.println("savedReactionPoint.getPoint() = " + savedReactionPoint.getPoint());
         System.out.println("savedReactionPoint.getRelId() = " + savedReactionPoint.getRelId());
