@@ -1,4 +1,4 @@
-package com.wiken.example1.article.exception;
+package com.wiken.example1.reactionpoint.exception;
 
 public class PointServiceException extends Exception {
     public PointServiceException(String message) {

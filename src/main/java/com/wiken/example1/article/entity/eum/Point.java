@@ -1,6 +1,6 @@
 package com.wiken.example1.article.entity.eum;
 
-import com.wiken.example1.article.exception.PointServiceException;
+import com.wiken.example1.reactionpoint.exception.PointServiceException;
 import lombok.Getter;
 
 import java.util.Arrays;

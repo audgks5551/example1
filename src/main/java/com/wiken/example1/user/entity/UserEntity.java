@@ -2,6 +2,7 @@ package com.wiken.example1.user.entity;
 
 import com.wiken.example1.article.entity.ArticleEntity;
 import com.wiken.example1.base.entity.BaseEntity;
+import com.wiken.example1.reactionpoint.entity.ReactionPointEntity;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -55,4 +56,10 @@ public class UserEntity extends BaseEntity implements Serializable {
     @Setter
     @Column(nullable = false, unique = true)
     private String encryptedPwd;
+
+    /**
+     * 유저의 좋아요와 싫어요
+     */
+    @OneToMany(mappedBy = "user")
+    private List<ReactionPointEntity> reactionPoints = new ArrayList<>();
 }

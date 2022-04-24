@@ -1,9 +1,10 @@
-package com.wiken.example1.article.entity;
+package com.wiken.example1.reactionpoint.entity;
 
 import com.wiken.example1.article.entity.eum.RelType;
 import com.wiken.example1.article.entity.eum.Point;
-import com.wiken.example1.article.converter.PointConverter;
+import com.wiken.example1.reactionpoint.converter.PointConverter;
 import com.wiken.example1.base.entity.BaseEntity;
+import com.wiken.example1.user.entity.UserEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 import static javax.persistence.EnumType.STRING;
+import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
@@ -37,4 +39,8 @@ public class ReactionPointEntity extends BaseEntity {
     @Column(nullable = false)
     @Convert(converter = PointConverter.class)
     private Point point;
+
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private UserEntity user;
 }

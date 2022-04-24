@@ -1,6 +1,7 @@
 package com.wiken.example1.article.entity;
 
-import com.wiken.example1.article.repository.ReactionPointRepository;
+import com.wiken.example1.reactionpoint.repository.ReactionPointRepository;
+import com.wiken.example1.reactionpoint.entity.ReactionPointEntity;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

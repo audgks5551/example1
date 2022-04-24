@@ -1,7 +1,7 @@
-package com.wiken.example1.article.converter;
+package com.wiken.example1.reactionpoint.converter;
 
 import com.wiken.example1.article.entity.eum.Point;
-import com.wiken.example1.article.exception.PointServiceException;
+import com.wiken.example1.reactionpoint.exception.PointServiceException;
 import lombok.SneakyThrows;
 
 import javax.persistence.AttributeConverter;

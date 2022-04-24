@@ -32,7 +32,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Iterable<ArticleEntity> findAllArticles() {
-        return articleRepository.findArticleWithUserAll();
+        return articleRepository.findArticleListAll();
     }
 
     @Override
