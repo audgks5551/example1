@@ -1,7 +1,7 @@
 package com.wiken.example1.reactionpoint.controller;
 
-import com.wiken.example1.article.entity.eum.Point;
-import com.wiken.example1.article.entity.eum.RelType;
+import com.wiken.example1.reactionpoint.entity.eum.Point;
+import com.wiken.example1.reactionpoint.entity.eum.RelType;
 import com.wiken.example1.reactionpoint.dto.ReactionPointDto;
 import com.wiken.example1.reactionpoint.exception.PointNotFoundException;
 import com.wiken.example1.reactionpoint.exception.ReactionPointEntityNotFoundException;

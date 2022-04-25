@@ -10,8 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
 
-import static com.wiken.example1.article.entity.eum.RelType.ARTICLE;
-import static com.wiken.example1.article.entity.eum.Point.GOOD;
+import static com.wiken.example1.reactionpoint.entity.eum.RelType.ARTICLE;
+import static com.wiken.example1.reactionpoint.entity.eum.Point.GOOD;
 
 @SpringBootTest
 @Transactional

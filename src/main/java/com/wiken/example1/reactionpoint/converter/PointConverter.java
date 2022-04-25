@@ -1,6 +1,6 @@
 package com.wiken.example1.reactionpoint.converter;
 
-import com.wiken.example1.article.entity.eum.Point;
+import com.wiken.example1.reactionpoint.entity.eum.Point;
 import com.wiken.example1.reactionpoint.exception.PointServiceException;
 import lombok.SneakyThrows;
 

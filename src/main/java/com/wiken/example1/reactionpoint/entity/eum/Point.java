@@ -1,4 +1,4 @@
-package com.wiken.example1.article.entity.eum;
+package com.wiken.example1.reactionpoint.entity.eum;
 
 import com.wiken.example1.reactionpoint.exception.PointServiceException;
 import lombok.Getter;
@@ -7,8 +7,8 @@ import java.util.Arrays;
 
 @Getter
 public enum Point {
-    GOOD(1, "좋아요"),
-    BAD(-1, "싫어요");
+    GOOD(1, "good"),
+    BAD(-1, "bad");
 
     private Integer code;
     private String value;

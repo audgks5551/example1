@@ -10,8 +10,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.wiken.example1.article.entity.eum.Point.BAD;
-import static com.wiken.example1.article.entity.eum.Point.GOOD;
+import static com.wiken.example1.reactionpoint.entity.eum.Point.BAD;
+import static com.wiken.example1.reactionpoint.entity.eum.Point.GOOD;
 
 @Service
 @RequiredArgsConstructor

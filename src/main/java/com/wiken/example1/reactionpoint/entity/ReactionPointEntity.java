@@ -1,7 +1,7 @@
 package com.wiken.example1.reactionpoint.entity;
 
-import com.wiken.example1.article.entity.eum.RelType;
-import com.wiken.example1.article.entity.eum.Point;
+import com.wiken.example1.reactionpoint.entity.eum.RelType;
+import com.wiken.example1.reactionpoint.entity.eum.Point;
 import com.wiken.example1.reactionpoint.converter.PointConverter;
 import com.wiken.example1.base.entity.BaseEntity;
 import com.wiken.example1.user.entity.UserEntity;
