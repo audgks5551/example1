@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.Arrays;
 
@@ -37,6 +36,7 @@ public class ReactionPointController {
             @RequestParam("type") RelType relType,
             @RequestParam("point") Point point,
             @AuthenticationPrincipal SUser user,
+            @RequestParam("redirect") String redirectUri,
             RedirectAttributes redirectAttributes
     ) throws PointNotFoundException, ReactionPointEntityNotFoundException {
 
@@ -47,8 +47,8 @@ public class ReactionPointController {
                 .anyMatch(r -> r.equals(relType));
         if (!existRelType) {
             redirectAttributes.addFlashAttribute("message", "잘못된 정보입니다");
-
-            return "redirect:/";
+            redirectAttributes.addAttribute("id", relId);
+            return "redirect:" + redirectUri;
         }
 
         /**
@@ -77,11 +77,9 @@ public class ReactionPointController {
          */
         if (findReactionPointDto == null) {
             reactionPointService.createReactionPoint(originalReactionPointDto);
-            /**
-             * TODO
-             *  - 눌렀던 해당글로 이동
-             */
-            return "redirect:/";
+
+            redirectAttributes.addAttribute("id", relId);
+              return "redirect:" + redirectUri;
         }
 
         /**
@@ -99,6 +97,7 @@ public class ReactionPointController {
             reactionPointService.changeReactionPoint(findReactionPointDto);
         }
 
-        return "redirect:/";
+        redirectAttributes.addAttribute("id", relId);
+        return "redirect:" + redirectUri;
     }
 }

@@ -10,8 +10,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 import static com.wiken.example1.article.entity.eum.Point.BAD;
 import static com.wiken.example1.article.entity.eum.Point.GOOD;
 
@@ -41,17 +39,19 @@ public class ReactionPointServiceImpl implements ReactionPointService {
     @Override
     public ReactionPointDto findReactionPoint(ReactionPointDto reactionPointDto) {
 
-        Optional<ReactionPointEntity> reactionPointEntity =
+
+        ReactionPointEntity reactionPointEntity =
                 reactionPointRepository.findByRelIdAndRelTypeAndUser(
-                        reactionPointDto.getRelId(),
-                        reactionPointDto.getRelType(),
-                        reactionPointDto.getUser()
-                );
+                    reactionPointDto.getRelId(),
+                    reactionPointDto.getRelType(),
+                    reactionPointDto.getUser()
+                )
+                        .orElse(null);
 
         /**
          * 없으면 널 반환
          */
-        if (reactionPointEntity.isPresent()) {
+        if (reactionPointEntity == null) {
             return null;
         }
 
