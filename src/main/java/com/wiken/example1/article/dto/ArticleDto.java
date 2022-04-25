@@ -1,11 +1,15 @@
 package com.wiken.example1.article.dto;
 
+import com.querydsl.core.annotations.QueryProjection;
 import com.wiken.example1.user.entity.UserEntity;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ArticleDto {
     private String title;
     private String content;
@@ -13,4 +17,13 @@ public class ArticleDto {
     private UserEntity user;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
+
+    @QueryProjection
+    public ArticleDto(String title, String content, String articleId, LocalDateTime createdDate, LocalDateTime modifiedDate) {
+        this.title = title;
+        this.content = content;
+        this.articleId = articleId;
+        this.createdDate = createdDate;
+        this.modifiedDate = modifiedDate;
+    }
 }

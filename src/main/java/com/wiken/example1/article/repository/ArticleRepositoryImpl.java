@@ -1,6 +1,8 @@
 package com.wiken.example1.article.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.wiken.example1.article.dto.ArticleDto;
+import com.wiken.example1.article.dto.QArticleDto;
 import com.wiken.example1.article.entity.ArticleEntity;
 
 import javax.persistence.EntityManager;
@@ -23,6 +25,22 @@ public class ArticleRepositoryImpl implements ArticleRepositoryCustom {
         return jpaQueryFactory
                 .selectFrom(articleEntity)
                 .join(articleEntity.user, userEntity).fetchJoin()
+                .fetch();
+    }
+
+    @Override
+    public List<ArticleDto> findArticleListWithReactionPointAll() {
+        return jpaQueryFactory
+                .select(
+                        new QArticleDto(
+                                articleEntity.title,
+                                articleEntity.content,
+                                articleEntity.articleId,
+                                articleEntity.createdDate,
+                                articleEntity.modifiedDate
+                        )
+                )
+                .from(articleEntity)
                 .fetch();
     }
 }
