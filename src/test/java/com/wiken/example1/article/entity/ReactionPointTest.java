@@ -8,10 +8,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.transaction.Transactional;
+
 import static com.wiken.example1.article.entity.eum.RelType.ARTICLE;
 import static com.wiken.example1.article.entity.eum.Point.GOOD;
 
 @SpringBootTest
+@Transactional
 public class ReactionPointTest {
 
     @Autowired

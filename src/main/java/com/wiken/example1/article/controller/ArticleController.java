@@ -4,10 +4,7 @@ import com.wiken.example1.article.dto.ArticleDto;
 import com.wiken.example1.article.entity.ArticleEntity;
 import com.wiken.example1.article.exception.ArticleNotFoundException;
 import com.wiken.example1.article.service.ArticleService;
-import com.wiken.example1.article.vo.RequestCreateArticle;
-import com.wiken.example1.article.vo.RequestModifyArticle;
-import com.wiken.example1.article.vo.ResponseDetailArticle;
-import com.wiken.example1.article.vo.ResponseModifyArticle;
+import com.wiken.example1.article.vo.*;
 import com.wiken.example1.user.entity.SUser;
 import com.wiken.example1.user.entity.UserEntity;
 import com.wiken.example1.user.service.UserService;
@@ -33,12 +30,12 @@ public class ArticleController {
 
     @GetMapping
     public String showArticle(Model model) {
-        Iterable<ArticleEntity> articleList = articleService.findAllArticles();
+        Iterable<ArticleDto> articleList = articleService.findAllArticles();
 
-        List<ResponseDetailArticle> result = new ArrayList<>();
+        List<ResponseListArticle> result = new ArrayList<>();
 
         articleList.forEach(a ->
-                result.add(mapper.map(a, ResponseDetailArticle.class))
+                result.add(mapper.map(a, ResponseListArticle.class))
         );
 
         model.addAttribute("articles", result);

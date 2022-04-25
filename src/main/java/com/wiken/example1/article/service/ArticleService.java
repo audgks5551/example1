@@ -6,7 +6,7 @@ import com.wiken.example1.article.exception.ArticleNotFoundException;
 
 public interface ArticleService {
     ArticleDto createArticle(ArticleDto articleDto);
-    Iterable<ArticleEntity> findAllArticles();
+    Iterable<ArticleDto> findAllArticles();
     ArticleEntity findArticle(String articleId) throws ArticleNotFoundException;
     void deleteArticle(String articleId) throws ArticleNotFoundException;
     void modifyArticle(ArticleDto articleDto);

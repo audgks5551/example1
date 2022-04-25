@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -31,8 +32,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Iterable<ArticleEntity> findAllArticles() {
-        return articleRepository.findArticleListAll();
+    public Iterable<ArticleDto> findAllArticles() {
+        return articleRepository.findArticleListWithReactionPointAll();
     }
 
     @Override

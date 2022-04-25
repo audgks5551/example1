@@ -56,7 +56,7 @@
                                                         d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z">
                                                 </path>
                                             </svg>
-                                            <span class="font-bold">34</span>
+                                            <span th:text="${article.goodReactionPoint}" class="font-bold"></span>
                                         </a>
                                     </td>
                                     <td class="text-center py-5 border-b border-gray-200 bg-white text-sm">
@@ -66,10 +66,10 @@
                                                         d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z">
                                                 </path>
                                             </svg>
-                                            <span class="font-bold">34</span>
+                                            <span th:text="${article.badReactionPoint}" class="font-bold"></span>
                                         </a>
                                     </td>
-                                    <td th:text="${article.user.name}" class="text-center py-5 border-b border-gray-200 bg-white text-sm">글쓴이</td>
+                                    <td th:text="${article.writer}" class="text-center py-5 border-b border-gray-200 bg-white text-sm">글쓴이</td>
                                     <td class="text-center py-5 border-b border-gray-200 bg-white text-sm">0</td>
                                     <td th:text="${article.createdDate}" class="text-center py-5 border-b border-gray-200 bg-white text-sm"></td>
                                     <td th:text="${article.modifiedDate}" class="text-center py-5 border-b border-gray-200 bg-white text-sm"></td>
