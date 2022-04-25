@@ -33,7 +33,11 @@
                     <p th:text="${article.content}"></p>
                     <div class="py-4">
 
-                        <a th:href="@{/reaction(id=${article.articleId}, type='ARTICLE', point='GOOD', redirect='/article/detail')}"
+                        <a th:href="@{/reaction(
+                            id=${article.articleId},
+                            type='ARTICLE',
+                            point='GOOD',
+                            redirect='/article/detail')}"
                            class="inline-flex items-center mr-2">
                             <span class="mr-2">
                                 <svg class="fill-rose-600" style="width: 24px; height: 24px;" viewBox="0 0 24 24">

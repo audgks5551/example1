@@ -14,7 +14,8 @@ public class ResponseDetailArticle {
     private String title;
     private String content;
     private String articleId;
-    private UserEntity user;
+    private String userId;
+    private String writer;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
 }

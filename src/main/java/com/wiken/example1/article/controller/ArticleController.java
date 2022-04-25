@@ -3,6 +3,7 @@ package com.wiken.example1.article.controller;
 import com.wiken.example1.article.dto.ArticleDto;
 import com.wiken.example1.article.entity.ArticleEntity;
 import com.wiken.example1.article.exception.ArticleNotFoundException;
+import com.wiken.example1.article.resolver.ArticleAuthenticationUser;
 import com.wiken.example1.article.service.ArticleService;
 import com.wiken.example1.article.vo.*;
 import com.wiken.example1.user.entity.SUser;
@@ -28,6 +29,9 @@ public class ArticleController {
     private final UserService userService;
     private final ModelMapper mapper;
 
+    /**
+     * article list
+     */
     @GetMapping
     public String showArticle(Model model) {
         Iterable<ArticleDto> articleList = articleService.findAllArticles();
@@ -43,6 +47,9 @@ public class ArticleController {
         return "article/articleList";
     }
 
+    /**
+     * article create
+     */
     @GetMapping("/create")
     public String createArticleForm(RequestCreateArticle requestCreateArticle) {
         return "article/createArticleForm";
@@ -64,6 +71,9 @@ public class ArticleController {
         return "redirect:/article/detail";
     }
 
+    /**
+     * article detail
+     */
     @GetMapping("/detail")
     public String articleDetail(
             @RequestParam("id") String articleId, Model model) throws ArticleNotFoundException {
@@ -76,13 +86,16 @@ public class ArticleController {
         return "article/articleDetail";
     }
 
+    /**
+     * article delete
+     */
     @GetMapping("/delete")
     public String deleteArticle(
             @RequestParam("id") String articleId,
             RedirectAttributes redirectAttributes,
-            @AuthenticationPrincipal SUser user) throws ArticleNotFoundException {
-        ArticleDto articleDto = articleService.findArticle(articleId);
-        if(!user.getUserId().equals(articleDto.getUserId())) {
+            @ArticleAuthenticationUser SUser user) throws ArticleNotFoundException {
+
+        if(user == null) {
             redirectAttributes.addFlashAttribute("message", "삭제할 권한이 없습니다.");
             return "redirect:/article";
         }
@@ -93,16 +106,19 @@ public class ArticleController {
         return "redirect:/article";
     }
 
+    /**
+     * article modify form
+     */
     @GetMapping("/modify")
     public String modifyArticle(
             @RequestParam("id") String articleId,
             RedirectAttributes redirectAttributes,
             Model model,
-            @AuthenticationPrincipal SUser user) throws ArticleNotFoundException {
+            @ArticleAuthenticationUser SUser user) throws ArticleNotFoundException {
 
         ArticleDto articleDto = articleService.findArticle(articleId);
 
-        if (!user.getUserId().equals(articleDto.getUserId())) {
+        if (user == null) {
             redirectAttributes.addAttribute("id", articleDto.getArticleId());
             redirectAttributes.addFlashAttribute("message", "수정 권한이 없습니다.");
             return "redirect:/article/detail";
@@ -115,16 +131,17 @@ public class ArticleController {
         return "article/modifyArticleForm";
     }
 
+    /**
+     * article modify
+     */
     @PostMapping("/modify")
     public String modifyArticle(
             @RequestParam("id") String articleId,
             @ModelAttribute("modifyArticle") RequestModifyArticle requestArticle,
             RedirectAttributes redirectAttributes,
-            @AuthenticationPrincipal SUser user) throws ArticleNotFoundException {
+            @ArticleAuthenticationUser SUser user) throws ArticleNotFoundException {
 
-
-        UserEntity userEntity = userService.findUserByUserId(user.getUserId());
-        if (!userEntity.getUserId().equals(user.getUserId())) {
+        if (user == null) {
             redirectAttributes.addAttribute("id", requestArticle.getArticleId());
             redirectAttributes.addFlashAttribute("message", "수정 권한이 없습니다.");
             return "redirect:/article/detail";
