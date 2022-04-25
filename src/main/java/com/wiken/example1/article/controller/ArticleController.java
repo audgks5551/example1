@@ -67,9 +67,9 @@ public class ArticleController {
     @GetMapping("/detail")
     public String articleDetail(
             @RequestParam("id") String articleId, Model model) throws ArticleNotFoundException {
-        ArticleEntity articleEntity = articleService.findArticle(articleId);
+        ArticleDto articleDto = articleService.findArticle(articleId);
 
-        ResponseDetailArticle responseArticle = mapper.map(articleEntity, ResponseDetailArticle.class);
+        ResponseDetailArticle responseArticle = mapper.map(articleDto, ResponseDetailArticle.class);
 
         model.addAttribute("article", responseArticle);
 
@@ -81,8 +81,8 @@ public class ArticleController {
             @RequestParam("id") String articleId,
             RedirectAttributes redirectAttributes,
             @AuthenticationPrincipal SUser user) throws ArticleNotFoundException {
-        ArticleEntity articleEntity = articleService.findArticle(articleId);
-        if(!user.getUserId().equals(articleEntity.getUser().getUserId())) {
+        ArticleDto articleDto = articleService.findArticle(articleId);
+        if(!user.getUserId().equals(articleDto.getUserId())) {
             redirectAttributes.addFlashAttribute("message", "삭제할 권한이 없습니다.");
             return "redirect:/article";
         }
@@ -100,15 +100,15 @@ public class ArticleController {
             Model model,
             @AuthenticationPrincipal SUser user) throws ArticleNotFoundException {
 
-        ArticleEntity articleEntity = articleService.findArticle(articleId);
+        ArticleDto articleDto = articleService.findArticle(articleId);
 
-        if (!user.getUserId().equals(articleEntity.getUser().getUserId())) {
-            redirectAttributes.addAttribute("id", articleEntity.getArticleId());
+        if (!user.getUserId().equals(articleDto.getUserId())) {
+            redirectAttributes.addAttribute("id", articleDto.getArticleId());
             redirectAttributes.addFlashAttribute("message", "수정 권한이 없습니다.");
             return "redirect:/article/detail";
         }
 
-        ResponseModifyArticle responseArticle = mapper.map(articleEntity, ResponseModifyArticle.class);
+        ResponseModifyArticle responseArticle = mapper.map(articleDto, ResponseModifyArticle.class);
 
         model.addAttribute("modifyArticle", responseArticle);
 

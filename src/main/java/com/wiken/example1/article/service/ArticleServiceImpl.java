@@ -9,7 +9,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -37,14 +36,18 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ArticleEntity findArticle(String articleId) throws ArticleNotFoundException {
+    public ArticleDto findArticle(String articleId) throws ArticleNotFoundException {
         ArticleEntity articleEntity = articleRepository.findByArticleId(articleId);
 
         if (articleEntity == null) {
             throw new ArticleNotFoundException("게시글을 찾을 수 없습니다.");
         }
 
-        return articleEntity;
+        ArticleDto articleDto = mapper.map(articleEntity, ArticleDto.class);
+        articleDto.setUserId(articleEntity.getUser().getUserId());
+        articleDto.setWriter(articleEntity.getUser().getName());
+
+        return articleDto;
     }
 
     @Override

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layouts/layout.html}">
 
     <head>
@@ -18,7 +19,8 @@
                                 <div th:text="${article.createdDate}" class="text-slate-500"></div>
                             </div>
                         </div>
-                        <div th:if="${#authentication.principal.userId} == ${article.user.userId}">
+                        <div sec:authorize="isAuthenticated()"
+                             th:if="${#authentication.principal.userId} == ${article.userId}">
                             <a th:href="@{/article/modify(id=${article.articleId})}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                                 수정
                             </a>
@@ -31,12 +33,7 @@
                     <p th:text="${article.content}"></p>
                     <div class="py-4">
 
-                        <a th:href="@{/reaction(
-                            id=${article.articleId},
-                            type='ARTICLE',
-                            point='GOOD',
-                            redirect='/article/detail'
-                            )}"
+                        <a th:href="@{/reaction(id=${article.articleId}, type='ARTICLE', point='GOOD', redirect='/article/detail')}"
                            class="inline-flex items-center mr-2">
                             <span class="mr-2">
                                 <svg class="fill-rose-600" style="width: 24px; height: 24px;" viewBox="0 0 24 24">
