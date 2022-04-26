@@ -6,6 +6,7 @@ import com.wiken.example1.article.exception.ArticleNotFoundException;
 import com.wiken.example1.article.resolver.ArticleAuthenticationUser;
 import com.wiken.example1.article.service.ArticleService;
 import com.wiken.example1.article.vo.*;
+import com.wiken.example1.reply.vo.RequestReply;
 import com.wiken.example1.user.entity.SUser;
 import com.wiken.example1.user.entity.UserEntity;
 import com.wiken.example1.user.service.UserService;
@@ -82,6 +83,7 @@ public class ArticleController {
         ResponseDetailArticle responseArticle = mapper.map(articleDto, ResponseDetailArticle.class);
 
         model.addAttribute("article", responseArticle);
+        model.addAttribute("requestReply", new RequestReply());
 
         return "article/articleDetail";
     }
