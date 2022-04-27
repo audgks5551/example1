@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,11 +53,13 @@ public class ArticleController {
     /**
      * article create
      */
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/create")
     public String createArticleForm(RequestCreateArticle requestCreateArticle) {
         return "article/createArticleForm";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/create")
     public String createArticle(
             @ModelAttribute RequestCreateArticle requestCreateArticle,
@@ -92,6 +95,7 @@ public class ArticleController {
     /**
      * article delete
      */
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/delete")
     public String deleteArticle(
             @RequestParam("id") String articleId,
@@ -112,6 +116,7 @@ public class ArticleController {
     /**
      * article modify form
      */
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify")
     public String modifyArticle(
             @RequestParam("id") String articleId,
@@ -137,6 +142,7 @@ public class ArticleController {
     /**
      * article modify
      */
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify")
     public String modifyArticle(
             @RequestParam("id") String articleId,

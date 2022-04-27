@@ -66,8 +66,16 @@
                         </a>
                     </div>
                     <div class="relative">
-                        <form th:action="@{/reply}" th:object="${requestReply}" method="POST">
-                            <input th:field="*{content}" type="text" placeholder="Write a comment" class="pt-2 pb-2 pl-3 w-full h-11 bg-slate-100 rounded-lg placeholder:text-slate-600 font-medium pr-20"/>
+                        <a sec:authorize="isAnonymous()" th:href="@{/login}">
+                            <input type="text" placeholder="댓글 추가..." class="pt-2 pb-2 pl-3 w-full h-11 bg-slate-100 rounded-lg placeholder:text-slate-600 font-medium pr-20"/>
+                            <button type="button" class="flex absolute right-3 top-2/4 -mt-3 items-center">
+                                <svg class="fill-blue-500" style="width: 24px; height: 24px;" viewBox="0 0 24 24">
+                                    <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z"></path>
+                                </svg>
+                            </button>
+                        </a>
+                        <form sec:authorize="isAuthenticated()" th:action="@{/reply}" th:object="${requestReply}" method="POST">
+                            <input  th:field="*{content}" type="text" placeholder="댓글 추가..." class="pt-2 pb-2 pl-3 w-full h-11 bg-slate-100 rounded-lg placeholder:text-slate-600 font-medium pr-20"/>
                             <button type="submit" class="flex absolute right-3 top-2/4 -mt-3 items-center">
                                 <svg class="fill-blue-500" style="width: 24px; height: 24px;" viewBox="0 0 24 24">
                                     <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z"></path>
