@@ -1,8 +1,13 @@
 package com.wiken.example1.article.vo;
 
 import lombok.Data;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.time.LocalDateTime;
+import java.util.Iterator;
+import java.util.function.Function;
 
 @Data
 public class ResponseListArticle {

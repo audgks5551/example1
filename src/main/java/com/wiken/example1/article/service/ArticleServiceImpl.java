@@ -6,9 +6,12 @@ import com.wiken.example1.article.exception.ArticleNotFoundException;
 import com.wiken.example1.article.repository.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -31,7 +34,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Iterable<ArticleDto> findAllArticles() {
+    public List<ArticleDto> findAllArticles() {
         return articleRepository.findArticleListWithReactionPointAll();
     }
 
@@ -67,5 +70,11 @@ public class ArticleServiceImpl implements ArticleService {
         ArticleEntity articleEntity = articleRepository.findByArticleId(articleDto.getArticleId());
         articleEntity.setTitle(articleDto.getTitle());
         articleEntity.setContent(articleDto.getContent());
+    }
+
+    @Override
+    public Page<ArticleDto> findAllArticlesWithPage(int page) {
+        PageRequest pageable = PageRequest.of(page, 10);
+        return articleRepository.findArticleListWithReactionPointAndPageableAll(pageable);
     }
 }

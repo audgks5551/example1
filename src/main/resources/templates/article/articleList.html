@@ -47,7 +47,7 @@
                             <tbody th:each="article, index : ${articles}">
                                 <tr th:onclick="|location.href='@{'/article/detail?id=' + ${article.articleId}}'|"
                                     class="hover:cursor-pointer hover:text-red-500">
-                                    <td th:text="${index.count}" class="text-center py-5 border-b border-gray-200 bg-white text-sm"></td>
+                                    <td th:text="${page.startPoint + index.count}" class="text-center py-5 border-b border-gray-200 bg-white text-sm"></td>
                                     <td th:text="${article.title}" class="w-[55%] text-center py-5 border-b border-gray-200 bg-white text-sm"></td>
                                     <td class="text-center py-5 border-b border-gray-200 bg-white text-sm">
                                         <a class="flex justify-center items-center" href="#">
@@ -76,14 +76,20 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between">
+                        <div th:if="${page.isExist}" class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between">
                             <span class="text-xs xs:text-sm text-gray-900">
-                                Showing 1 to 4 of 50 Entries
+                                Showing <span th:text="${page.currentNumber}">1</span> to <span th:text="${page.totalPages}">4</span> of <span th:text="${page.totalArticles}">50</span> Entries
                             </span>
                             <div class="inline-flex mt-2 xs:mt-0">
-                                <button class="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-l">Prev</button>
+                                <button th:classappend="${page.haveNoPrevious} ? 'disabled'"
+                                        class="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-l">
+                                    <a th:href="@{|?page=${page.previous}|}">Prev</a>
+                                </button>
                                 &nbsp; &nbsp;
-                                <button class="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-r">Next</button>
+                                <button th:classappend="${page.haveNoNext} ? 'disabled'"
+                                        class="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-r">
+                                    <a th:href="@{|?page=${page.next}|}">Next</a>
+                                </button>
                             </div>
                         </div>
                     </div>

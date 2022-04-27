@@ -5,8 +5,11 @@ import com.wiken.example1.user.entity.UserEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Any;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 
 import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
@@ -16,7 +19,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @NoArgsConstructor
 @Table(name = "replies")
-public class ReplyEntity {
+public class ReplyEntity implements Serializable {
     @Id
     @Column(nullable = false)
     @GeneratedValue(strategy = IDENTITY)
@@ -39,7 +42,6 @@ public class ReplyEntity {
     /**
      * 연관 id
      */
-    @Setter
     @Column(nullable = false)
     private String relId;
 

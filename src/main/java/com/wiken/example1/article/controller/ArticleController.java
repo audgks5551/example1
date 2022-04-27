@@ -12,6 +12,8 @@ import com.wiken.example1.user.entity.UserEntity;
 import com.wiken.example1.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,17 +36,16 @@ public class ArticleController {
      * article list
      */
     @GetMapping
-    public String showArticle(Model model) {
-        Iterable<ArticleDto> articleList = articleService.findAllArticles();
+    public String showArticle(Model model, @RequestParam(value="page", defaultValue="0") int page) {
+        Page<ArticleDto> articleList = articleService.findAllArticlesWithPage(page);
 
         List<ResponseListArticle> result = new ArrayList<>();
-
         articleList.forEach(a ->
                 result.add(mapper.map(a, ResponseListArticle.class))
         );
 
         model.addAttribute("articles", result);
-
+        model.addAttribute("page", new PageableInfo(articleList));
         return "article/articleList";
     }
 

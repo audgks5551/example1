@@ -8,8 +8,11 @@ import com.wiken.example1.user.entity.UserEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 
 import static javax.persistence.EnumType.STRING;
 import static javax.persistence.FetchType.LAZY;
@@ -23,7 +26,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Setter
 @NoArgsConstructor
 @Table(name = "reaction_points")
-public class ReactionPointEntity extends BaseEntity {
+public class ReactionPointEntity extends BaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(nullable = false)

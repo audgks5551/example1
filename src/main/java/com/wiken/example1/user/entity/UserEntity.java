@@ -5,14 +5,13 @@ import com.wiken.example1.base.entity.BaseEntity;
 import com.wiken.example1.reactionpoint.entity.ReactionPointEntity;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * 유저 Entity
@@ -56,10 +55,4 @@ public class UserEntity extends BaseEntity implements Serializable {
     @Setter
     @Column(nullable = false, unique = true)
     private String encryptedPwd;
-
-    /**
-     * 유저의 좋아요와 싫어요
-     */
-    @OneToMany(mappedBy = "user")
-    private List<ReactionPointEntity> reactionPoints = new ArrayList<>();
 }
