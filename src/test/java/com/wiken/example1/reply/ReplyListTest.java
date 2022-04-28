@@ -25,7 +25,7 @@ public class ReplyListTest {
         String relId = "00ae9be2-3b6b-49fa-907e-122be7dcae0a";
         RelType relType = RelType.ARTICLE;
         LocalDateTime currentLocalDateTime = LocalDateTime.now();
-        List<ReplyDto> replyDtos = repository.replyListWithReactionPoint(relId, relType);
+        List<ReplyDto> replyDtos = repository.findReplyListWithReactionPoint(relId, relType);
         String result = null;
         for (ReplyDto replyDto : replyDtos) {
             long YEARS = ChronoUnit.YEARS.between(replyDto.getCreatedDate(), currentLocalDateTime);

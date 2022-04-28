@@ -6,5 +6,5 @@ import com.wiken.example1.reply.dto.ReplyDto;
 import java.util.List;
 
 public interface ReplyRepositoryCustom {
-    List<ReplyDto> replyListWithReactionPoint(String relId, RelType relType);
+    List<ReplyDto> findReplyListWithReactionPoint(String relId, RelType relType);
 }

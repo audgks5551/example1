@@ -20,7 +20,7 @@ public class ReplyRepositoryImpl implements ReplyRepositoryCustom {
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public List<ReplyDto> replyListWithReactionPoint(String relId, RelType relType) {
+    public List<ReplyDto> findReplyListWithReactionPoint(String relId, RelType relType) {
 
         return jpaQueryFactory
                 .select(
