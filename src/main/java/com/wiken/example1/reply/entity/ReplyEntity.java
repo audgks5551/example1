@@ -1,5 +1,6 @@
 package com.wiken.example1.reply.entity;
 
+import com.wiken.example1.base.entity.BaseEntity;
 import com.wiken.example1.reactionpoint.entity.eum.RelType;
 import com.wiken.example1.user.entity.UserEntity;
 import lombok.Getter;
@@ -19,7 +20,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @NoArgsConstructor
 @Table(name = "replies")
-public class ReplyEntity implements Serializable {
+public class ReplyEntity extends BaseEntity {
     @Id
     @Column(nullable = false)
     @GeneratedValue(strategy = IDENTITY)
@@ -42,6 +43,7 @@ public class ReplyEntity implements Serializable {
     /**
      * 연관 id
      */
+    @Setter
     @Column(nullable = false)
     private String relId;
 
