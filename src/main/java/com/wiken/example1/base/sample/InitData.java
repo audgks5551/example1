@@ -18,10 +18,13 @@ import java.util.UUID;
  */
 @Profile("local")
 @Component
-@RequiredArgsConstructor
 public class InitData {
 
     private final InitMemberService initMemberService;
+
+    public InitData(InitMemberService initMemberService) {
+        this.initMemberService = initMemberService;
+    }
 
     @PostConstruct
     public void init() {

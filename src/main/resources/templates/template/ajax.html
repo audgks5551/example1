@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout.html}">
+
+    <head>
+        <title>ajax test</title>
+    </head>
+
+    <body>
+        <section layout:fragment="content">
+            <span>ajax test</span>
+
+        </section>
+
+        <script layout:fragment="javascript">
+
+            function test() {
+                $.ajaxSetup({
+                    url: '/reply',
+                    global: false,
+                    type: "GET"
+                });
+
+                $.ajax({
+                    data: {
+                        age: 19
+                    }
+                })
+                .done(function (data) {
+                        console.log(data.age);
+                        console.log("성공")
+                })
+                .fail(function (xhr, status, errorThrown) {
+                        console.log("오류")
+                        console.log("xhr: " + xhr)
+                        console.log("status: " + status)
+                        console.log("errorThrown" + errorThrown)
+                })
+                .always(function(xhr, status) {
+                        console.log("항상 실행");
+                        console.log("xhr: " + xhr)
+                        console.log("status: " + status)
+                });
+            }
+
+            function ajax_get() {
+                $.get("/reply",
+                    {
+                        age: 19
+                    },
+                    function (data, status) {
+                        console.log("data.age: " + data.age)
+                        console.log("status: " + status)
+                    }
+                );
+            }
+
+            function init() {
+                ajax_get();
+            }
+
+            init();
+        </script>
+
+    </body>
+
+</html>
