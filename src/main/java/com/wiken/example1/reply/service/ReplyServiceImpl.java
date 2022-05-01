@@ -7,6 +7,8 @@ import com.wiken.example1.reply.entity.ReplyEntity;
 import com.wiken.example1.reply.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -35,8 +37,9 @@ public class ReplyServiceImpl implements ReplyService {
      * relId와 relType을 통한 답변 조회
      */
     @Override
-    public Iterable<ReplyDto> replyListWithUsername(String relId, RelType relType) {
-        Iterable<ReplyDto> replyList = replyRepository.findReplyListWithReactionPoint(relId, relType);
+    public Page<ReplyDto> replyListWithUsername(String relId, RelType relType, int page) {
+        PageRequest pageable = PageRequest.of(page, 2);
+        Page<ReplyDto> replyList = replyRepository.findReplyListWithReactionPoint(relId, relType, pageable);
 
         replyList.forEach(replyDto ->
             replyDto.setCompareCurrentAndPastDates(

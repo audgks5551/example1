@@ -38,7 +38,6 @@
                     <h2 th:text="${article.title}" class="text-3xl font-extrabold mb-2"></h2>
                     <p th:text="${article.content}"></p>
                     <div class="py-4">
-
                         <a th:href="@{/reaction(
                             id=${article.articleId},
                             type='ARTICLE',
@@ -95,9 +94,9 @@
                     <div class="pt-6">
                         <div id="comments"></div>
                         <div id="moreComments" class="w-full">
-                            <a href="#"
-                               class="py-3 px-4 w-full block bg-slate-100 text-center rounded-lg font-medium hover:bg-slate-200 transition ease-in-out delay-75">Show
-                                more comments</a>
+                            <button class="py-3 px-4 w-full block bg-slate-100 text-center rounded-lg font-medium hover:bg-slate-200 transition ease-in-out delay-75">Show
+                                more comments
+                            </button>
                         </div>
                     </div>
                 </article>
@@ -137,6 +136,7 @@
         </section>
 
         <script layout:fragment="javascript" th:inline="javascript">
+            let page = 0;
 
             function reply_list() {
                 $.ajaxSetup({
@@ -148,7 +148,8 @@
                 $.ajax({
                     data: {
                         relId: [[${article.articleId}]],
-                        relType: "ARTICLE"
+                        relType: "ARTICLE",
+                        page: page
                     }
                 })
                 .done(function (replies) {
@@ -162,6 +163,12 @@
 
                         $("#comments").append(result);
                     })
+
+                    if (replies.length < 2) {
+                        $("#moreComments").remove();
+                    }
+
+                    page++;
                 })
                 .fail(function (xhr, status, errorThrown) {
                     console.log("오류")
@@ -170,10 +177,11 @@
 
             $(function() {
                 reply_list();
+
+                $("#moreComments").click(function (){
+                    reply_list();
+                });
             });
         </script>
-
-
     </body>
-
 </html>

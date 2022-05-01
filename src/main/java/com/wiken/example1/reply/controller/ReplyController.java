@@ -11,6 +11,7 @@ import com.wiken.example1.user.entity.UserEntity;
 import com.wiken.example1.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -74,8 +75,9 @@ public class ReplyController {
     @GetMapping
     public ResponseEntity<List<ResponseReply>> listReplies(
             @RequestParam String relId,
-            @RequestParam RelType relType) {
-        Iterable<ReplyDto> replyDtos = replyService.replyListWithUsername(relId, relType);
+            @RequestParam RelType relType,
+            @RequestParam(defaultValue = "0") int page) {
+        Page<ReplyDto> replyDtos = replyService.replyListWithUsername(relId, relType, page);
 
         List<ResponseReply> result = new ArrayList<>();
         replyDtos.forEach(replyDto ->

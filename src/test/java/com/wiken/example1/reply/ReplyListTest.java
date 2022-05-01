@@ -6,6 +6,8 @@ import com.wiken.example1.reply.repository.ReplyRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -25,7 +27,8 @@ public class ReplyListTest {
         String relId = "00ae9be2-3b6b-49fa-907e-122be7dcae0a";
         RelType relType = RelType.ARTICLE;
         LocalDateTime currentLocalDateTime = LocalDateTime.now();
-        List<ReplyDto> replyDtos = repository.findReplyListWithReactionPoint(relId, relType);
+        PageRequest pageable = PageRequest.of(2, 2);
+        List<ReplyDto> replyDtos = repository.findReplyListWithReactionPoint(relId, relType, pageable);
         String result = null;
         for (ReplyDto replyDto : replyDtos) {
             long YEARS = ChronoUnit.YEARS.between(replyDto.getCreatedDate(), currentLocalDateTime);
