@@ -11,5 +11,5 @@ public interface ArticleService {
     ArticleDto findArticle(String articleId) throws ArticleNotFoundException;
     void deleteArticle(String articleId) throws ArticleNotFoundException;
     void modifyArticle(ArticleDto articleDto);
-    Page<ArticleDto> findAllArticlesWithPage(int page);
+    Page<ArticleDto> findAllArticlesWithPage(int page, String search);
 }

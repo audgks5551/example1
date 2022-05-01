@@ -16,3 +16,8 @@ html > body {
     font-family: "BMJUA";
     text-underline-position: under;
 }
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.33;
+}

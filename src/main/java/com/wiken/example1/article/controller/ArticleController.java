@@ -37,9 +37,12 @@ public class ArticleController {
      * article list
      */
     @GetMapping
-    public String showArticle(Model model, @RequestParam(value="page", defaultValue="0") int page) {
-        Page<ArticleDto> articleList = articleService.findAllArticlesWithPage(page);
-
+    public String showArticle(
+            @RequestParam(value="page", defaultValue="0") int page,
+            @RequestParam(value = "search", required = false, defaultValue = "") String search,
+            Model model) {
+        Page<ArticleDto> articleList = articleService.findAllArticlesWithPage(page, search);
+        long totalElements = articleList.getTotalElements();
         List<ResponseListArticle> result = new ArrayList<>();
         articleList.forEach(a ->
                 result.add(mapper.map(a, ResponseListArticle.class))
@@ -47,19 +50,18 @@ public class ArticleController {
 
         model.addAttribute("articles", result);
         model.addAttribute("page", new PageableInfo(articleList));
+        model.addAttribute("search", search);
         return "article/articleList";
     }
 
     /**
      * article create
      */
-    @PreAuthorize("isAuthenticated()")
     @GetMapping("/create")
     public String createArticleForm(RequestCreateArticle requestCreateArticle) {
         return "article/createArticleForm";
     }
 
-    @PreAuthorize("isAuthenticated()")
     @PostMapping("/create")
     public String createArticle(
             @ModelAttribute RequestCreateArticle requestCreateArticle,

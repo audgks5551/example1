@@ -77,8 +77,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Page<ArticleDto> findAllArticlesWithPage(int page) {
+    public Page<ArticleDto> findAllArticlesWithPage(int page, String search) {
         PageRequest pageable = PageRequest.of(page, 10);
-        return articleRepository.findArticleListWithReactionPointAndPageableAll(pageable);
+        return articleRepository.findArticleListWithReactionPointAndPageableAll(pageable, search);
     }
 }

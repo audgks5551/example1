@@ -52,7 +52,7 @@
                                     </path>
                                 </svg>
                             </span>
-                            <span class="text-lg font-bold">34</span>
+                            <span th:text="${article.goodReactionPoint}" class="text-lg font-bold">34</span>
                         </a>
                         <a th:href="@{/reaction(
                             id=${article.articleId},
@@ -68,7 +68,7 @@
                                 </path>
                             </svg>
                             </span>
-                            <span class="text-lg font-bold">34</span>
+                            <span th:text="${article.badReactionPoint}" class="text-lg font-bold">34</span>
                         </a>
                     </div>
                     <div class="relative">
@@ -92,7 +92,8 @@
                             <input th:name="redirectUri" value="/article/detail" type="hidden"/>
                         </form>
                     </div>
-                    <div id="comments" class="pt-6">
+                    <div class="pt-6">
+                        <div id="comments"></div>
                         <div id="moreComments" class="w-full">
                             <a href="#"
                                class="py-3 px-4 w-full block bg-slate-100 text-center rounded-lg font-medium hover:bg-slate-200 transition ease-in-out delay-75">Show
@@ -159,7 +160,7 @@
                             .replace("{content}", reply.content)
                             .replace("{compareCurrentAndPastDates}", reply.compareCurrentAndPastDates);
 
-                        $("#moreComments").prepend(result);
+                        $("#comments").append(result);
                     })
                 })
                 .fail(function (xhr, status, errorThrown) {

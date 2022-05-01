@@ -21,18 +21,10 @@ public class ArticleListTest {
     private ModelMapper mapper;
 
     @Test
-    public void article_list() {
-        List<ArticleDto> articles = articleRepository.findArticleListWithReactionPointAll();
-        for (ArticleDto article : articles) {
-            System.out.println("article.getArticleId() = " + article.getArticleId());
-        }
-    }
-
-    @Test
     public void article_list_with_page() {
         int page = 0;
         PageRequest pageable = PageRequest.of(0, 10);
-        Page<ArticleDto> articles = articleRepository.findArticleListWithReactionPointAndPageableAll(pageable);
+        Page<ArticleDto> articles = articleRepository.findArticleListWithReactionPointAndPageableAll(pageable, "");
 
         System.out.println("articles.getTotalPages() = " + articles.getTotalPages());
         System.out.println("articles.getContent() = " + articles.getContent());

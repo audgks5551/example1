@@ -1,6 +1,5 @@
 package com.wiken.example1.article.vo;
 
-import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.domain.Page;
 
@@ -20,9 +19,8 @@ public class PageableInfo {
     public PageableInfo(Page<?> list) {
         this.isExist = !list.isEmpty();
         this.totalArticles = list.getTotalElements();
-        this.totalPages = list.getTotalPages() + 1;
+        this.totalPages = list.getTotalPages();
         this.totalArticles = list.getTotalElements();
-        this.totalPages = list.getTotalPages() + 1;
         this.size = list.getSize();
         this.currentNumber = list.getNumber() + 1;
         this.haveNoPrevious = !list.hasPrevious();

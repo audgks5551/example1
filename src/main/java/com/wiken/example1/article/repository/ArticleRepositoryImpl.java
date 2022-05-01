@@ -18,7 +18,6 @@ import static com.wiken.example1.article.entity.QArticleEntity.articleEntity;
 import static com.wiken.example1.reactionpoint.entity.eum.Point.*;
 import static com.wiken.example1.reactionpoint.entity.eum.RelType.ARTICLE;
 import static com.wiken.example1.reactionpoint.entity.QReactionPointEntity.reactionPointEntity;
-import static com.wiken.example1.reply.entity.QReplyEntity.replyEntity;
 import static com.wiken.example1.user.entity.QUserEntity.userEntity;
 
 /**
@@ -35,7 +34,7 @@ public class ArticleRepositoryImpl implements ArticleRepositoryCustom {
      *  - reactionPointEntity
      */
     @Override
-    public Page<ArticleDto> findArticleListWithReactionPointAndPageableAll(Pageable pageable) {
+    public Page<ArticleDto> findArticleListWithReactionPointAndPageableAll(Pageable pageable, String search) {
         /**
          * content
          */
@@ -60,6 +59,7 @@ public class ArticleRepositoryImpl implements ArticleRepositoryCustom {
                         compareId(reactionPointEntity.relId, articleEntity.articleId),
                         compareRelType(reactionPointEntity.relType)
                 )
+                .where(containsArticle(search))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .groupBy(articleEntity.articleId)
@@ -70,13 +70,8 @@ public class ArticleRepositoryImpl implements ArticleRepositoryCustom {
          */
         JPAQuery<Long> countQuery = jpaQueryFactory
                 .select(articleEntity.count())
-                .from(articleEntity)
-                .join(articleEntity.user, userEntity)
-                .leftJoin(reactionPointEntity)
-                .on(
-                        compareId(reactionPointEntity.relId, articleEntity.articleId),
-                        compareRelType(reactionPointEntity.relType)
-                );
+                .where(containsArticle(search))
+                .from(articleEntity);
 
         return PageableExecutionUtils.getPage(contentQuery, pageable, countQuery::fetchOne);
     }
@@ -140,5 +135,16 @@ public class ArticleRepositoryImpl implements ArticleRepositoryCustom {
                     .otherwise(0)
                     .sum()
                     .as(point.getValue() + "ReactionPoint");
+    }
+
+    /**
+     * 검색
+     */
+    private BooleanExpression containsArticle(String search) {
+        return search.trim().isEmpty() ? null :
+                articleEntity.title.contains(search)
+                        .or(articleEntity.content.contains(search))
+                        .or(articleEntity.articleId.contains(search))
+                        .or(articleEntity.user.name.contains(search));
     }
 }
