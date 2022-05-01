@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface ArticleService {
     ArticleDto createArticle(ArticleDto articleDto);
-    List<ArticleDto> findAllArticles();
     ArticleDto findArticle(String articleId) throws ArticleNotFoundException;
     void deleteArticle(String articleId) throws ArticleNotFoundException;
     void modifyArticle(ArticleDto articleDto);

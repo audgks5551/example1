@@ -1,5 +1,5 @@
-console.log("hi");
-
+// dark mode, light mode change
+// start
 const sunIcon = document.querySelector(".sun");
 const moonIcon = document.querySelector(".moon");
 
@@ -41,5 +41,6 @@ moonIcon.addEventListener("click", () => {
 });
 
 themeCheck();
+// end
 
 

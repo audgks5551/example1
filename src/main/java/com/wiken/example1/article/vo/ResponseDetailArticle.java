@@ -16,6 +16,8 @@ public class ResponseDetailArticle {
     private String articleId;
     private String userId;
     private String writer;
-    private LocalDateTime createdDate;
-    private LocalDateTime modifiedDate;
+    private Integer goodReactionPoint;
+    private Integer badReactionPoint;
+    private String compareCurrentAndPastDates;
+    private String orderlyDate;
 }

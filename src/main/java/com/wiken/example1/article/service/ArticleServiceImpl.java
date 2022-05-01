@@ -4,6 +4,7 @@ import com.wiken.example1.article.dto.ArticleDto;
 import com.wiken.example1.article.entity.ArticleEntity;
 import com.wiken.example1.article.exception.ArticleNotFoundException;
 import com.wiken.example1.article.repository.ArticleRepository;
+import com.wiken.example1.base.utils.DateUtils;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
+
+import static com.wiken.example1.article.entity.QArticleEntity.articleEntity;
 
 @Service
 @RequiredArgsConstructor
@@ -34,21 +37,22 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<ArticleDto> findAllArticles() {
-        return articleRepository.findArticleListWithReactionPointAll();
-    }
-
-    @Override
     public ArticleDto findArticle(String articleId) throws ArticleNotFoundException {
-        ArticleEntity articleEntity = articleRepository.findByArticleId(articleId);
+        ArticleDto articleDto = articleRepository.findArticleWithReactionPoint(articleId);
 
-        if (articleEntity == null) {
+        System.out.println("articleDto == null = " + articleDto == null);
+
+        if (articleDto == null) {
             throw new ArticleNotFoundException("게시글을 찾을 수 없습니다.");
         }
 
-        ArticleDto articleDto = mapper.map(articleEntity, ArticleDto.class);
-        articleDto.setUserId(articleEntity.getUser().getUserId());
-        articleDto.setWriter(articleEntity.getUser().getName());
+        articleDto.setCompareCurrentAndPastDates(
+                DateUtils.getCompareCurrentAndPastDates(articleDto.getCreatedDate())
+        );
+
+        articleDto.setOrderlyDate(
+                DateUtils.getOrderlyDate(articleDto.getCreatedDate())
+        );
 
         return articleDto;
     }

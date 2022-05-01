@@ -4,9 +4,7 @@ import com.wiken.example1.reactionpoint.entity.eum.RelType;
 import com.wiken.example1.reply.dto.ReplyDto;
 import com.wiken.example1.reply.entity.ReplyEntity;
 
-import java.util.List;
-
 public interface ReplyService {
     void createReply(ReplyEntity replyEntity);
-    List<ReplyDto> replyListWithUsername(String relId, RelType relType);
+    Iterable<ReplyDto> replyListWithUsername(String relId, RelType relType);
 }

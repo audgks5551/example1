@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class ArticleDto {
     /**
      * ArticleEntity
@@ -34,16 +33,10 @@ public class ArticleDto {
     private Integer badReactionPoint;
 
     /**
-     * test
+     * util
      */
-    @QueryProjection
-    public ArticleDto(String title, String content, String articleId, LocalDateTime createdDate, LocalDateTime modifiedDate) {
-        this.title = title;
-        this.content = content;
-        this.articleId = articleId;
-        this.createdDate = createdDate;
-        this.modifiedDate = modifiedDate;
-    }
+    private String compareCurrentAndPastDates;
+    private String orderlyDate;
 
     /**
      * article list

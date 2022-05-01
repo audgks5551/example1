@@ -6,5 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ResponseReply {
-    private int age;
+    private String writer;
+    private String content;
+    private String compareCurrentAndPastDates;
 }

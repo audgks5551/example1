@@ -1,13 +1,12 @@
 package com.wiken.example1.article.repository;
 
-import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.core.types.dsl.CaseBuilder;
-import com.querydsl.core.types.dsl.NumberExpression;
+import com.querydsl.core.types.dsl.*;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.wiken.example1.article.dto.ArticleDto;
 import com.wiken.example1.article.dto.QArticleDto;
 import com.wiken.example1.reactionpoint.entity.eum.Point;
+import com.wiken.example1.reactionpoint.entity.eum.RelType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +18,7 @@ import static com.wiken.example1.article.entity.QArticleEntity.articleEntity;
 import static com.wiken.example1.reactionpoint.entity.eum.Point.*;
 import static com.wiken.example1.reactionpoint.entity.eum.RelType.ARTICLE;
 import static com.wiken.example1.reactionpoint.entity.QReactionPointEntity.reactionPointEntity;
+import static com.wiken.example1.reply.entity.QReplyEntity.replyEntity;
 import static com.wiken.example1.user.entity.QUserEntity.userEntity;
 
 /**
@@ -35,32 +35,6 @@ public class ArticleRepositoryImpl implements ArticleRepositoryCustom {
      *  - reactionPointEntity
      */
     @Override
-    public List<ArticleDto> findArticleListWithReactionPointAll() {
-
-        return jpaQueryFactory
-                .select(
-                    new QArticleDto(
-                            articleEntity.title,
-                            articleEntity.content,
-                            articleEntity.articleId,
-                            articleEntity.createdDate,
-                            articleEntity.modifiedDate,
-                            userEntity.userId,
-                            userEntity.name.as("writer"),
-                            getReactionPoint(GOOD),
-                            getReactionPoint(BAD)
-                        )
-                )
-                .from(articleEntity)
-                .join(articleEntity.user, userEntity)
-                .leftJoin(reactionPointEntity)
-                .on(getCondition())
-
-                .groupBy(articleEntity.articleId)
-                .fetch();
-    }
-
-    @Override
     public Page<ArticleDto> findArticleListWithReactionPointAndPageableAll(Pageable pageable) {
         /**
          * content
@@ -75,14 +49,17 @@ public class ArticleRepositoryImpl implements ArticleRepositoryCustom {
                                 articleEntity.modifiedDate,
                                 userEntity.userId,
                                 userEntity.name.as("writer"),
-                                getReactionPoint(GOOD),
-                                getReactionPoint(BAD)
+                                reactionPointCase(GOOD),
+                                reactionPointCase(BAD)
                         )
                 )
                 .from(articleEntity)
                 .join(articleEntity.user, userEntity)
                 .leftJoin(reactionPointEntity)
-                .on(getCondition())
+                .on(
+                        compareId(reactionPointEntity.relId, articleEntity.articleId),
+                        compareRelType(reactionPointEntity.relType)
+                )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .groupBy(articleEntity.articleId)
@@ -96,28 +73,67 @@ public class ArticleRepositoryImpl implements ArticleRepositoryCustom {
                 .from(articleEntity)
                 .join(articleEntity.user, userEntity)
                 .leftJoin(reactionPointEntity)
-                .on(getCondition());
+                .on(
+                        compareId(reactionPointEntity.relId, articleEntity.articleId),
+                        compareRelType(reactionPointEntity.relType)
+                );
 
         return PageableExecutionUtils.getPage(contentQuery, pageable, countQuery::fetchOne);
     }
 
     /**
-     * condition
-     *  1. reactionPointEntity.relId == articleEntity.articleId
-     *  2. reactionPointEntity.relType == ARTICLE
+     * article detail
      */
-    private BooleanExpression getCondition() {
-        return reactionPointEntity.relId.eq(articleEntity.articleId)
-                .and(reactionPointEntity.relType.eq(ARTICLE));
+    @Override
+    public ArticleDto findArticleWithReactionPoint(String articleId) {
+        return jpaQueryFactory
+                .select(
+                        new QArticleDto(
+                                articleEntity.title,
+                                articleEntity.content,
+                                articleEntity.articleId,
+                                articleEntity.createdDate,
+                                articleEntity.modifiedDate,
+                                userEntity.userId,
+                                userEntity.name.as("writer"),
+                                reactionPointCase(GOOD),
+                                reactionPointCase(BAD)
+                        )
+                )
+                .from(articleEntity)
+                .join(articleEntity.user, userEntity)
+                .leftJoin(reactionPointEntity)
+                .on(
+                        compareId(reactionPointEntity.relId, articleEntity.articleId),
+                        compareRelType(reactionPointEntity.relType)
+                )
+                .where(
+                    articleEntity.articleId.eq(articleId)
+                )
+                .fetchOne();
     }
 
+    /**
+     * condition
+     *  - relId1 == relId2
+     */
+    private BooleanExpression compareId(StringPath relId1, StringPath relId2) {
+        return relId1.eq(relId2);
+    }
 
+    /**
+     * condition
+     *  - relType == ARTICLE
+     */
+    private BooleanExpression compareRelType(EnumPath<RelType> relType) {
+        return relType.eq(ARTICLE);
+    }
 
     /**
      * good reaction
      * bad reaction
      */
-    private NumberExpression<Integer> getReactionPoint(Point point) {
+    private NumberExpression<Integer> reactionPointCase(Point point) {
         return new CaseBuilder()
                     .when(reactionPointEntity.point.eq(point))
                     .then(1)

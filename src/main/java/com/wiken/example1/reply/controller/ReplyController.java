@@ -1,6 +1,7 @@
 package com.wiken.example1.reply.controller;
 
 import com.wiken.example1.reactionpoint.entity.eum.RelType;
+import com.wiken.example1.reply.dto.ReplyDto;
 import com.wiken.example1.reply.entity.ReplyEntity;
 import com.wiken.example1.reply.service.ReplyService;
 import com.wiken.example1.reply.vo.RequestReply;
@@ -16,7 +17,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequestMapping("/reply")
@@ -69,10 +72,17 @@ public class ReplyController {
      * 답변 리스팅
      */
     @GetMapping
-    public ResponseEntity<ResponseReply> listReplies(int age) {
-        ResponseReply responseReply = new ResponseReply();
-        responseReply.setAge(age);
-        return ResponseEntity.ok(responseReply);
+    public ResponseEntity<List<ResponseReply>> listReplies(
+            @RequestParam String relId,
+            @RequestParam RelType relType) {
+        Iterable<ReplyDto> replyDtos = replyService.replyListWithUsername(relId, relType);
+
+        List<ResponseReply> result = new ArrayList<>();
+        replyDtos.forEach(replyDto ->
+                result.add(mapper.map(replyDto, ResponseReply.class))
+        );
+
+        return ResponseEntity.ok(result);
     }
 
     /**

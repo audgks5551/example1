@@ -7,6 +7,6 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface ArticleRepositoryCustom {
-    List<ArticleDto> findArticleListWithReactionPointAll();
     Page<ArticleDto> findArticleListWithReactionPointAndPageableAll(Pageable pageable);
+    ArticleDto findArticleWithReactionPoint(String articleId);
 }

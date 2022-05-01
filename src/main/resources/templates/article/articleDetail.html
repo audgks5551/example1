@@ -15,8 +15,14 @@
                         <div class="flex">
                             <a class="inline-block mr-4" href="#"><img class="rounded-full max-w-none w-12 h-12" src="https://randomuser.me/api/portraits/men/35.jpg" /></a>
                             <div class="flex flex-col">
-                                <div><a class="inline-block text-lg font-bold" href="#">글쓴이</a></div>
-                                <div th:text="${article.createdDate}" class="text-slate-500"></div>
+                                <div>
+                                    <a th:text="${article.writer}" class="inline-block text-lg font-bold" href="#">글쓴이</a>
+
+                                </div>
+                                <div class="text-slate-500">
+                                    <span th:text="${article.orderlyDate}" class="text-slate-500">2022월 3월 2일</span>
+                                    <span th:text="|(${article.compareCurrentAndPastDates})|" class="text-slate-500">1주 전</span>
+                                </div>
                             </div>
                         </div>
                         <div sec:authorize="isAuthenticated()"
@@ -86,20 +92,30 @@
                             <input th:name="redirectUri" value="/article/detail" type="hidden"/>
                         </form>
                     </div>
-                    <div class="pt-6">
-                        <!-- Comment row -->
-                        <div class="media flex pb-4">
-                            <a class="mr-4" href="#">
-                                <img class="rounded-full max-w-none w-12 h-12" src="https://randomuser.me/api/portraits/men/82.jpg" />
-                            </a>
-                            <div class="media-body">
-                                <div>
-                                    <a class="inline-block text-base font-bold mr-2" href="#">Leslie Alexander</a>
-                                    <span class="text-slate-500">25 minutes ago</span>
-                                </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur.</p>
-                                <div class="mt-2 flex items-center">
-                                    <a class="inline-flex items-center py-2 mr-3" href="#">
+                    <div id="comments" class="pt-6">
+                        <div id="moreComments" class="w-full">
+                            <a href="#"
+                               class="py-3 px-4 w-full block bg-slate-100 text-center rounded-lg font-medium hover:bg-slate-200 transition ease-in-out delay-75">Show
+                                more comments</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- reply comments row template -->
+            <template id="commentRows">
+                <div class="media flex pb-4">
+                    <a class="mr-4" href="#">
+                        <img class="rounded-full max-w-none w-12 h-12" src="https://randomuser.me/api/portraits/men/82.jpg" />
+                    </a>
+                    <div class="media-body">
+                        <div>
+                            <a class="inline-block text-base font-bold mr-2" href="#">{writer}</a>
+                            <span class="text-slate-500">{compareCurrentAndPastDates}</span>
+                        </div>
+                        <p>{content}</p>
+                        <div class="mt-2 flex items-center">
+                            <a class="inline-flex items-center py-2 mr-3" href="#">
                                         <span class="mr-2">
                                             <svg class="fill-rose-600" style="width: 22px; height: 22px;"
                                                  viewBox="0 0 24 24">
@@ -108,58 +124,55 @@
                                             </path>
                                             </svg>
                                         </span>
-                                        <span class="text-base font-bold">12</span>
-                                    </a>
-                                    <button class="py-2 px-4 font-medium hover:bg-slate-50 rounded-lg">
-                                        Repply
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End comments row -->
-                        <!-- comments row -->
-                        <div class="media flex pb-4">
-                            <a class="inline-block mr-4" href="#">
-                                <img class="rounded-full max-w-none w-12 h-12" src="https://randomuser.me/api/portraits/women/76.jpg" />
+                                <span class="text-base font-bold">12</span>
                             </a>
-                            <div class="media-body">
-                                <div>
-                                    <a class="inline-block text-base font-bold mr-2" href="#">Tina Mills</a>
-                                    <span class="text-slate-500">3 minutes ago</span>
-                                </div>
-                                <p>Dolor sit ameteiusmod consectetur adipiscing elit.</p>
-                                <div class="mt-2 flex items-center">
-                                    <a class="inline-flex items-center py-2 mr-3" href="#">
-                                        <span class="mr-2">
-                                            dkdk
-                                            <svg class="fill-rose-600" style="width: 22px; height: 22px;"
-                                                 viewBox="0 0 24 24">
-                                                <path
-                                                    d="M12.1 18.55L12 18.65L11.89 18.55C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5C9.04 5 10.54 6 11.07 7.36H12.93C13.46 6 14.96 5 16.5 5C18.5 5 20 6.5 20 8.5C20 11.39 16.86 14.24 12.1 18.55M16.5 3C14.76 3 13.09 3.81 12 5.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5C2 12.27 5.4 15.36 10.55 20.03L12 21.35L13.45 20.03C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3Z">
-                                                </path>
-                                            </svg>
-                                        </span>
-                                        <span class="text-base font-bold">0</span>
-                                    </a>
-                                    <button class="py-2 px-4 font-medium hover:bg-slate-50 rounded-lg">
-                                        Repply
-                                    </button>
-                                </div>
-                            </div>
+                            <button class="py-2 px-4 font-medium hover:bg-slate-50 rounded-lg">
+                                Reply
+                            </button>
                         </div>
-                        <!-- End comments row -->
-                        <!-- More comments -->
-                        <div class="w-full">
-                            <a href="#"
-                               class="py-3 px-4 w-full block bg-slate-100 text-center rounded-lg font-medium hover:bg-slate-200 transition ease-in-out delay-75">Show
-                                more comments</a>
-                        </div>
-                        <!-- End More comments -->
                     </div>
-                    <!-- End Comments content -->
-                </article>
-            </div>
+                </div>
+            </template>
         </section>
+
+        <script layout:fragment="javascript" th:inline="javascript">
+
+            function reply_list() {
+                $.ajaxSetup({
+                    url: '/reply',
+                    global: false,
+                    type: "GET"
+                });
+
+                $.ajax({
+                    data: {
+                        relId: [[${article.articleId}]],
+                        relType: "ARTICLE"
+                    }
+                })
+                .done(function (replies) {
+                    console.log("성공");
+
+                    replies.map((reply) => {
+                        let result = $("#commentRows").html()
+                            .replace("{writer}", reply.writer)
+                            .replace("{content}", reply.content)
+                            .replace("{compareCurrentAndPastDates}", reply.compareCurrentAndPastDates);
+
+                        $("#moreComments").prepend(result);
+                    })
+                })
+                .fail(function (xhr, status, errorThrown) {
+                    console.log("오류")
+                });
+            }
+
+            $(function() {
+                reply_list();
+            });
+        </script>
+
+
     </body>
 
 </html>
