@@ -17,24 +17,24 @@ import static com.wiken.example1.reactionpoint.entity.eum.Point.GOOD;
 @Transactional
 public class ReactionPointTest {
 
-    @Autowired
-    private ReactionPointRepository reactionPointRepository;
+//    @Autowired
+//    private ReactionPointRepository reactionPointRepository;
 
     @Test
     @DisplayName("저장 테스트")
     public void save() {
-        ReactionPointEntity reactionPoint = new ReactionPointEntity();
-        reactionPoint.setPoint(GOOD);
-        reactionPoint.setRelId("RELID-UUID");
-        reactionPoint.setRelType(ARTICLE);
-
-        ReactionPointEntity savedReactionPoint = reactionPointRepository.save(reactionPoint);
-
-        Assertions.assertThat(savedReactionPoint.getCreatedDate()).isNotNull();
-
-        System.out.println("savedReactionPoint.getId() = " + savedReactionPoint.getId());
-        System.out.println("savedReactionPoint.getPoint() = " + savedReactionPoint.getPoint());
-        System.out.println("savedReactionPoint.getRelId() = " + savedReactionPoint.getRelId());
-        System.out.println("savedReactionPoint.getArticleType() = " + savedReactionPoint.getRelType());
+//        ReactionPointEntity reactionPoint = new ReactionPointEntity();
+//        reactionPoint.setPoint(GOOD);
+//        reactionPoint.setRelId("RELID-UUID");
+//        reactionPoint.setRelType(ARTICLE);
+//
+//        ReactionPointEntity savedReactionPoint = reactionPointRepository.save(reactionPoint);
+//
+//        Assertions.assertThat(savedReactionPoint.getCreatedDate()).isNotNull();
+//
+//        System.out.println("savedReactionPoint.getId() = " + savedReactionPoint.getId());
+//        System.out.println("savedReactionPoint.getPoint() = " + savedReactionPoint.getPoint());
+//        System.out.println("savedReactionPoint.getRelId() = " + savedReactionPoint.getRelId());
+//        System.out.println("savedReactionPoint.getArticleType() = " + savedReactionPoint.getRelType());
     }
 }

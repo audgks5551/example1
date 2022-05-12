@@ -13,25 +13,25 @@ import java.util.List;
 
 @SpringBootTest
 public class ArticleListTest {
-
-    @Autowired
-    private ArticleRepository articleRepository;
-    
+//
+//    @Autowired
+//    private ArticleRepository articleRepository;
+//
     @Autowired
     private ModelMapper mapper;
 
     @Test
     public void article_list_with_page() {
-        int page = 0;
-        PageRequest pageable = PageRequest.of(0, 10);
-        Page<ArticleDto> articles = articleRepository.findArticleListWithReactionPointAndPageableAll(pageable, "");
-
-        System.out.println("articles.getTotalPages() = " + articles.getTotalPages());
-        System.out.println("articles.getContent() = " + articles.getContent());
-        System.out.println("articles.getSize() = " + articles.getSize());
-        System.out.println("articles.getSort() = " + articles.getSort());
-        System.out.println("articles.getTotalElements() = " + articles.getTotalElements());
-        System.out.println("articles.getNumberOfElements() = " + articles.getNumberOfElements());
+//        int page = 0;
+//        PageRequest pageable = PageRequest.of(0, 10);
+//        Page<ArticleDto> articles = articleRepository.findArticleListWithReactionPointAndPageableAll(pageable, "");
+//
+//        System.out.println("articles.getTotalPages() = " + articles.getTotalPages());
+//        System.out.println("articles.getContent() = " + articles.getContent());
+//        System.out.println("articles.getSize() = " + articles.getSize());
+//        System.out.println("articles.getSort() = " + articles.getSort());
+//        System.out.println("articles.getTotalElements() = " + articles.getTotalElements());
+//        System.out.println("articles.getNumberOfElements() = " + articles.getNumberOfElements());
 
     }
 }
