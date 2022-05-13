@@ -1,0 +1,18 @@
+spring:
+  thymeleaf:
+    cache: true
+  devtools:
+    livereload:
+      enabled: false
+    restart:
+      enabled: false
+  datasource:
+    url: jdbc:mariadb://${DB_HOST}:3306/example?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull&allowPublicKeyRetrieval=true
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+# hello.springmvc 패키지와 그 하위 로그 레벨 설정
+logging.level.sbs.apidemo: info
