@@ -30,7 +30,6 @@ public class InitData {
 
     private final InitMemberService initMemberService;
 
-
     public InitData(InitMemberService initMemberService) {
         this.initMemberService = initMemberService;
     }
